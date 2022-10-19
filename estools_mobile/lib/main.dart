@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,9 +27,11 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
+        color: myDark,
         alignment: Alignment.center,
-        child: const Text(
+        child: Text(
           "Azul World",
+          style: TextStyle(fontSize: 24, color: myWhite),
         ),
       ),
     );
