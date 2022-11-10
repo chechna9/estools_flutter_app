@@ -33,7 +33,7 @@ class MainPage extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(top: 200),
                     child: (Image.asset(
-                      "assets/logo.png",
+                      "assets/images/logoBO.png",
                       width: 187.3,
                       height: 127.29,
                     ))),
