@@ -1,3 +1,5 @@
+import 'package:estools_mobile/pages/Login.dart';
+import 'package:estools_mobile/pages/Sign_in.dart';
 import 'package:estools_mobile/pages/test.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
@@ -27,9 +29,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // second if you want that that the app start with it you have to set the initial route to the name of the rout
-      initialRoute: '/test.dart',
+      initialRoute: '/Login.dart',
       // first add your page here like this format routeName : (context)=> PageName()
-      routes: {'/test.dart': (context) => const Test()},
+      routes: {
+        '/test.dart': (context) => const Test(),
+        '/Login.dart': (context) => const Login(),
+        '/Sign_in.dart': (context) => const Signin()
+      },
     );
   }
 }
