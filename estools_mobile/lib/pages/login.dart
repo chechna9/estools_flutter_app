@@ -62,22 +62,36 @@ class LoginPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 25),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Password",
-            fillColor: myGrey,
-            filled: true,
-            contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            suffixIcon: ImageIcon(
-              AssetImage('assets/images/openedEye.png'),
-              size: 1,
-              color: myDark,
+        Container(
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              offset: const Offset(
+                0.0,
+                10.0,
+              ),
+              blurRadius: 10.0,
+              spreadRadius: -4.0,
             ),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(19.93),
-                borderSide: BorderSide(color: myDark, width: 2)),
+          ]),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: "Password",
+              fillColor: myGrey,
+              filled: true,
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              suffixIcon: Icon(
+                Icons.visibility_outlined,
+                color: myDark,
+                size: 30,
+              ),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(19.93),
+                  borderSide: BorderSide(color: myDark, width: 2)),
+            ),
+            obscureText: true,
           ),
-          obscureText: true,
         ),
         SizedBox(height: 20),
       ],
