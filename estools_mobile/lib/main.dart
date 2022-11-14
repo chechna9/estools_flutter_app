@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // second if you want that that the app start with it you have to set the initial route to the name of the rout
-      initialRoute: '/Login.dart',
+      initialRoute: '/Sign_in',
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
-        '/test.dart': (context) => const Test(),
-        '/Login.dart': (context) => const Login(),
-        '/Sign_in.dart': (context) => const Signin()
+        '/test': (context) => const Test(),
+        '/Login': (context) => const Login(),
+        '/Sign_in': (context) => const Signin()
       },
     );
   }
