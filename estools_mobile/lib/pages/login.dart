@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _header(context) {
+  Widget _header(context) {
     return Column(
       children: [
         const SizedBox(
@@ -42,38 +42,29 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _inputField(context) {
+  Widget _inputField(context) {
+    var edgeInsets = EdgeInsets;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Material(
-          shadowColor: myRed,
-          elevation: 18,
-        ),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Email",
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(19.93),
-                borderSide: BorderSide(color: myDark, width: 2)),
-            fillColor: myGrey,
-            filled: true,
-            contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        Container(
+          decoration: deco,
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: "Email",
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(19.93),
+                  borderSide: BorderSide(color: myDark, width: 2)),
+              fillColor: myGrey,
+              filled: true,
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            ),
           ),
         ),
         SizedBox(height: 25),
         Container(
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Colors.black38,
-              offset: const Offset(
-                0.0,
-                10.0,
-              ),
-              blurRadius: 10.0,
-              spreadRadius: -4.0,
-            ),
-          ]),
+          decoration: deco,
           child: TextField(
             decoration: InputDecoration(
               hintText: "Password",
@@ -81,10 +72,14 @@ class LoginPage extends StatelessWidget {
               filled: true,
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              suffixIcon: Icon(
-                Icons.visibility_outlined,
-                color: myDark,
-                size: 30,
+              suffixIcon: Align(
+                widthFactor: 2.5,
+                heightFactor: 2.0,
+                child: Icon(
+                  Icons.visibility_outlined,
+                  color: myDark,
+                  size: 25,
+                ),
               ),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(19.93),
@@ -98,7 +93,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _signup(context) {
+  Widget _signup(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -118,7 +113,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _forgotPassword(context) {
+  Widget _forgotPassword(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -138,44 +133,49 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _btn(context) {
+  Widget _btn(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        ElevatedButton.icon(
+        Container(
+            decoration: deco,
+            child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  primary: myGrey,
+                  shadowColor: myGrey,
+                  fixedSize: const Size(138, 59),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(19.93))),
+                ),
+                onPressed: () {},
+                icon: Image.asset(
+                  'assets/images/logo_googleg_48dp.png',
+                  height: 18,
+                ),
+                label: Text(
+                  'Sign in with Google',
+                  style: TextStyle(
+                    fontSize: 8.74,
+                    color: Colors.black,
+                  ),
+                ))),
+        Container(
+          decoration: deco,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              "Login",
+              style: TextStyle(fontSize: 27.06, fontWeight: FontWeight.bold),
+            ),
             style: ElevatedButton.styleFrom(
-              primary: myGrey,
-              shadowColor: myGrey,
-              fixedSize: const Size(138, 59),
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(19.93))),
+              fixedSize: const Size(138, 59),
+              shadowColor: myGrey,
+              primary: myDark,
             ),
-            onPressed: () {},
-            icon: ImageIcon(
-              AssetImage('assets/images/logo_googleg_48dp.png'),
-              size: 18,
-            ),
-            label: Text(
-              'Sign in with Google',
-              style: TextStyle(
-                fontSize: 8.74,
-                color: Colors.black,
-              ),
-            )),
-        ElevatedButton(
-          onPressed: () {},
-          child: Text(
-            "Login",
-            style: TextStyle(fontSize: 27.06, fontWeight: FontWeight.bold),
           ),
-          style: ElevatedButton.styleFrom(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(19.93))),
-            fixedSize: const Size(138, 59),
-            shadowColor: myGrey,
-            primary: myDark,
-          ),
-        )
+        ),
       ],
     );
   }
