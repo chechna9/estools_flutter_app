@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(SplashScreen());
-}
+import 'package:estools_mobile/constants.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -21,8 +18,8 @@ class MainPage extends StatelessWidget {
             height: double.infinity,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
                 MyDark,
                 MyRed,
@@ -33,7 +30,7 @@ class MainPage extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(top: 200),
                     child: (Image.asset(
-                      "assets/images/logoBO.png",
+                      "assets/images/logoWO.png",
                       width: 187.3,
                       height: 127.29,
                     ))),
