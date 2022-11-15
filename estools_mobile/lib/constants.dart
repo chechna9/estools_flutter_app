@@ -6,3 +6,14 @@ Color myGrey = const Color(0xffd9d9d9);
 Color myWhite = const Color(0xffeaeaea);
 
 const rn_login = '/login';
+const deco = const BoxDecoration(boxShadow: [
+  BoxShadow(
+    color: Colors.black38,
+    offset: const Offset(
+      0.0,
+      10.0,
+    ),
+    blurRadius: 8.0,
+    spreadRadius: -6.0,
+  ),
+]);
