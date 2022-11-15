@@ -24,8 +24,8 @@ class MainPage extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xff055ba3),
-                Color(0xfff43022),
+                MyDark,
+                MyRed,
               ],
             )),
             child: Column(
