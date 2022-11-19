@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           // exapmple
           headlineMedium: TextStyle(
-            fontSize: 40.0,
+            fontSize: 24.0,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
         '/test': (context) => const Test(),
-        splashRoute: (context) => SplashScreen(),
+        splashRoute: (context) => const SplashScreen(),
       },
     );
   }

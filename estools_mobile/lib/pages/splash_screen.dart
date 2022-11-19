@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:estools_mobile/constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -12,6 +13,7 @@ class SplashScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            stops: const [0.4, 1],
             colors: [
               myDark,
               myRed,
@@ -19,19 +21,14 @@ class SplashScreen extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              "assets/images/logoWO.png",
-              width: 187.3,
-              height: 127.29,
+            SvgPicture.asset(
+              "assets/images/svgs/logo.svg",
             ),
-            const Text(
+            Text(
               "Every Student's Tool",
-              style: TextStyle(
-                  fontSize: 19,
-                  fontFamily: 'Poppins',
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
