@@ -6,3 +6,17 @@ Color myGrey = const Color(0xffd9d9d9);
 Color myWhite = const Color(0xffeaeaea);
 
 const String splashRoute = '/splashScreen';
+const String registerRoute = '/splashScreen';
+
+// box shadow
+const myBoxShadow = BoxDecoration(boxShadow: [
+  BoxShadow(
+    color: Colors.black38,
+    offset: Offset(
+      0.0,
+      10.0,
+    ),
+    blurRadius: 8.0,
+    spreadRadius: -6.0,
+  ),
+]);

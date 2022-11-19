@@ -1,5 +1,5 @@
+import 'package:estools_mobile/pages/Sign_in.dart';
 import 'package:estools_mobile/pages/splash_screen.dart';
-import 'package:estools_mobile/pages/test.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
       initialRoute: splashRoute,
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
-        '/test': (context) => const Test(),
         splashRoute: (context) => const SplashScreen(),
+        registerRoute: (context) => const Signin(),
       },
     );
   }
