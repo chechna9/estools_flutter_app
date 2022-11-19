@@ -49,6 +49,7 @@ class RegisterForm extends StatelessWidget {
         Form(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomInputField(
                 labelText: 'First Name',
@@ -117,6 +118,7 @@ class SignUp_Button extends StatelessWidget {
             style: TextStyle(
               fontSize: 25,
               color: myWhite,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
@@ -152,11 +154,14 @@ class SIGoogle_Button extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          const Text(
-            'Sign up with Google',
-            style: TextStyle(
-              fontSize: 9,
-              color: Colors.black,
+          const Expanded(
+            child: Text(
+              'Sign up with Google',
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],
