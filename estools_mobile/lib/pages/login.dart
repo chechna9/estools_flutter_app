@@ -1,11 +1,10 @@
 import 'package:estools_mobile/components/inputField.dart';
-import 'package:flutter/material.dart';
 import 'package:estools_mobile/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Signin extends StatelessWidget {
-  const Signin({super.key});
-
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +19,7 @@ class Signin extends StatelessWidget {
               SvgPicture.asset(
                 "assets/images/svgs/logoBO.svg",
               ),
-              const RegisterForm(),
+              const LoginForm(),
             ],
           ),
         ),
@@ -29,8 +28,8 @@ class Signin extends StatelessWidget {
   }
 }
 
-class RegisterForm extends StatelessWidget {
-  const RegisterForm({
+class LoginForm extends StatelessWidget {
+  const LoginForm({
     Key? key,
   }) : super(key: key);
 
@@ -39,7 +38,7 @@ class RegisterForm extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Sign Up',
+          'Login',
           style: TextStyle(
             fontSize: 40,
             color: myRed,
@@ -55,26 +54,26 @@ class RegisterForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomInputField(
-                labelText: 'First Name',
-              ),
-              const SizedBox(height: 15),
-              const CustomInputField(
-                labelText: 'Last Name',
-              ),
-              const SizedBox(height: 15),
-              const CustomInputField(
                 labelText: 'Email',
               ),
               const SizedBox(height: 15),
               const CustomPasswordInput(
                 labelText: 'Password',
               ),
+              const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, loginRoute);
+                  Navigator.pushReplacementNamed(context, registerRoute);
                 },
                 child: const Text(
-                  "Already have an account?",
+                  "don't  have an account ?",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "forget your password ?",
                   style: TextStyle(color: Colors.black),
                 ),
               ),
@@ -84,7 +83,7 @@ class RegisterForm extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Flexible(child: SignUp_Button()),
+                  Flexible(child: Login_Button()),
                 ],
               ),
             ],
@@ -95,8 +94,8 @@ class RegisterForm extends StatelessWidget {
   }
 }
 
-class SignUp_Button extends StatelessWidget {
-  const SignUp_Button({
+class Login_Button extends StatelessWidget {
+  const Login_Button({
     Key? key,
   }) : super(key: key);
 
@@ -119,7 +118,7 @@ class SignUp_Button extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Sign Up',
+            'Login',
             style: TextStyle(
               fontSize: 25,
               color: myWhite,
@@ -161,7 +160,7 @@ class SIGoogle_Button extends StatelessWidget {
           ),
           const Expanded(
             child: Text(
-              'Sign up with Google',
+              'Sign in with Google',
               style: TextStyle(
                 fontSize: 10,
                 color: Colors.black,
