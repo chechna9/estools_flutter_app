@@ -7,6 +7,8 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 2))
+        .then((value) => Navigator.pushReplacementNamed(context, loginRoute));
     return Material(
       child: Container(
         decoration: BoxDecoration(
@@ -24,7 +26,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SvgPicture.asset(
-              "assets/images/svgs/logo.svg",
+              "assets/images/svgs/logoWO.svg",
             ),
             Text(
               "Every Student's Tool",
