@@ -8,15 +8,18 @@ Color myWhite = const Color(0xffeaeaea);
 const String splashRoute = '/splashScreen';
 const String registerRoute = '/register';
 const String loginRoute = '/login';
+const String agendaRoute = '/agenda';
 // box shadow
-const myBoxShadow = BoxDecoration(boxShadow: [
-  BoxShadow(
-    color: Colors.black38,
-    offset: Offset(
-      0.0,
-      10.0,
+const myBoxShadow = BoxDecoration(
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black38,
+      offset: Offset(
+        0.0,
+        10.0,
+      ),
+      blurRadius: 8.0,
+      spreadRadius: -6.0,
     ),
-    blurRadius: 8.0,
-    spreadRadius: -6.0,
-  ),
-]);
+  ],
+);
