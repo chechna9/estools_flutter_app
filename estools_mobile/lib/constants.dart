@@ -23,3 +23,14 @@ const myBoxShadow = BoxDecoration(
     ),
   ],
 );
+const buttonBoxShadow = [
+  BoxShadow(
+    color: Colors.black38,
+    offset: Offset(
+      0.0,
+      10.0,
+    ),
+    blurRadius: 8.0,
+    spreadRadius: -6.0,
+  ),
+];
