@@ -1,4 +1,4 @@
-import 'package:estools_mobile/components/action_card.dart';
+import 'package:estools_mobile/pages/agenda/action_card.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:estools_mobile/models/action_model.dart';
 import 'package:estools_mobile/models/agenda_model.dart';
@@ -20,35 +20,35 @@ class _AgendaPageState extends State<AgendaPage> {
   AgendaModele agenda = AgendaModele(days: [
     DayModele(actions: [
       ActionModele(
-        time: '08:30 AM',
+        time: '08:30',
         date: '1 nov',
         name: 'Devfest day 1 action 1',
         main: Colors.blue[200],
         sec: Colors.blue,
       ),
       ActionModele(
-        time: '10:30 AM',
+        time: '10:30',
         date: '1 nov',
         name: 'Devfest day 1 action 2',
         main: Colors.amber[200],
         sec: Colors.amber,
       ),
       ActionModele(
-        time: '11:30 AM',
+        time: '11:30',
         date: '1 nov',
         name: 'Devfest day 1 action 3',
         main: Colors.blue[200],
         sec: Colors.blue,
       ),
       ActionModele(
-        time: '12:30 AM',
+        time: '12:30',
         date: '1 nov',
         name: 'Devfest day 1 action 4',
         main: Colors.red[200],
         sec: Colors.red,
       ),
       ActionModele(
-        time: '14:30 AM',
+        time: '14:30',
         date: '1 nov',
         name: 'Devfest day 1 action 5',
         main: Colors.blue[200],
@@ -57,28 +57,28 @@ class _AgendaPageState extends State<AgendaPage> {
     ]),
     DayModele(actions: [
       ActionModele(
-        time: '08:30 AM',
+        time: '08:30',
         date: '1 nov',
         name: 'Devfest day 2 action 1',
         main: Colors.blue[200],
         sec: Colors.blue,
       ),
       ActionModele(
-        time: '10:30 AM',
+        time: '10:30',
         date: '2 nov',
         name: 'Devfest day 2 action 2',
         main: Colors.amber[200],
         sec: Colors.amber,
       ),
       ActionModele(
-        time: '11:30 AM',
+        time: '11:30',
         date: '2 nov',
         name: 'Devfest day 2 action 3',
         main: Colors.red[200],
         sec: Colors.red,
       ),
       ActionModele(
-        time: '12:30 AM',
+        time: '12:30',
         date: '2 nov',
         name: 'Devfest day 2 action 4',
         main: Colors.blue[200],
@@ -87,14 +87,14 @@ class _AgendaPageState extends State<AgendaPage> {
     ]),
     DayModele(actions: [
       ActionModele(
-        time: '08:30 AM',
+        time: '08:30',
         date: '1 nov',
         name: 'Devfest day 3 action 1',
         main: Colors.blue[200],
         sec: Colors.blue,
       ),
       ActionModele(
-        time: '10:30 AM',
+        time: '10:30',
         date: '2 nov',
         name: 'Devfest day 3 action 2',
         main: Colors.amber[200],
@@ -149,7 +149,7 @@ class _AgendaPageState extends State<AgendaPage> {
                     return Row(
                       children: [
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             boxShadow: buttonBoxShadow,
                           ),
                           child: TextButton(
