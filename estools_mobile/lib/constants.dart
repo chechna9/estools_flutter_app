@@ -34,3 +34,14 @@ const buttonBoxShadow = [
     spreadRadius: -6.0,
   ),
 ];
+
+// button style form
+ButtonStyle btnSyle = TextButton.styleFrom(
+  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+  backgroundColor: myRed,
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(10),
+    ),
+  ),
+);

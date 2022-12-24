@@ -38,6 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.1.6
   auto_size_text: ^3.0.0
+  bottom_sheet: ^3.1.2
+
   
   
 # launche Icon

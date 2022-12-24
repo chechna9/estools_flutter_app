@@ -1,3 +1,5 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:estools_mobile/components/agenda_categorie_card.dart';
 import 'package:estools_mobile/pages/agenda/action_card.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:estools_mobile/models/action_model.dart';
@@ -190,7 +192,7 @@ class _AgendaPageState extends State<AgendaPage> {
                 ),
               ),
               Flexible(
-                flex: 3,
+                flex: 2,
                 child: ListView(
                   children: agenda.days[currentDay - 1].actions
                       .map(
@@ -200,9 +202,76 @@ class _AgendaPageState extends State<AgendaPage> {
                 ),
               ),
               const SizedBox(height: 10),
+              const Expanded(
+                child: Footer(),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: myDark,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Categories',
+                style: EstlTStyle.appBarTitle.copyWith(
+                  color: myWhite,
+                  fontSize: 20,
+                ),
+              ),
+              TextButton(
+                  style: btnSyle,
+                  onPressed: () {},
+                  child: Column(
+                    children: [
+                      Text(
+                        'All',
+                        style: TextStyle(
+                          color: myWhite,
+                        ),
+                      ),
+                      Text(
+                        '18 task',
+                        style: TextStyle(
+                          color: myWhite,
+                          fontSize: 8,
+                          height: 0.5,
+                        ),
+                      ),
+                    ],
+                  ))
+            ],
+          ),
+          // categories
+          Column(
+            children: [
+              AgendaCategCard(),
+            ],
+          ),
+        ],
       ),
     );
   }
