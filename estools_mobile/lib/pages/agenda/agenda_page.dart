@@ -5,7 +5,10 @@ import 'package:estools_mobile/models/action_model.dart';
 import 'package:estools_mobile/models/agenda_model.dart';
 import 'package:estools_mobile/models/agenda_model.dart';
 import 'package:estools_mobile/models/day_model.dart';
+import 'package:estools_mobile/utils/colors.dart';
+import 'package:estools_mobile/utils/screen_dim.dart';
 import 'package:estools_mobile/utils/text_style.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class AgendaPage extends StatefulWidget {
@@ -18,6 +21,13 @@ class AgendaPage extends StatefulWidget {
 }
 
 class _AgendaPageState extends State<AgendaPage> {
+  bool allSelected = false;
+  void selectAll() {
+    setState(() {
+      allSelected = !allSelected;
+    });
+  }
+
   AgendaModele agenda = AgendaModele(days: [
     DayModele(actions: [
       ActionModele(
@@ -207,7 +217,7 @@ class _AgendaPageState extends State<AgendaPage> {
                 ),
               ),
             ),
-            const Footer()
+            Footer(allSelected: allSelected, selectAll: selectAll),
           ],
         ),
       ),
@@ -216,8 +226,12 @@ class _AgendaPageState extends State<AgendaPage> {
 }
 
 class Footer extends StatelessWidget {
+  final Function selectAll;
+  final bool allSelected;
   const Footer({
     Key? key,
+    required this.selectAll,
+    required this.allSelected,
   }) : super(key: key);
 
   @override
@@ -237,44 +251,47 @@ class Footer extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Categories',
-                style: EstlTStyle.appBarTitle.copyWith(
-                  color: myWhite,
-                  fontSize: 20,
-                ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Categories',
+              style: EstlTStyle.appBarTitle.copyWith(
+                color: myWhite,
+                fontSize: 20,
               ),
-              TextButton(
-                  style: btnSyle,
-                  onPressed: () {},
-                  child: Column(
-                    children: [
-                      Text(
-                        'All',
-                        style: TextStyle(
-                          color: myWhite,
-                        ),
-                      ),
-                      Text(
-                        '18 task',
-                        style: TextStyle(
-                          color: myWhite,
-                          fontSize: 8,
-                          height: 0.5,
-                        ),
-                      ),
-                    ],
-                  ))
-            ],
+            ),
           ),
           // categories
-          Column(
-            children: const [
-              AgendaCategCard(),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                AgendaCategCard(
+                  categName: 'All',
+                  numberOfTasks: 14,
+                  icon: Icons.all_inclusive,
+                  bgColor: EstlColors.altColor1,
+                ),
+                AgendaCategCard(
+                  categName: 'Sport',
+                  numberOfTasks: 3,
+                  icon: Icons.sports_basketball_sharp,
+                  bgColor: myRed,
+                ),
+                AgendaCategCard(
+                  categName: 'Home Work',
+                  numberOfTasks: 1,
+                  icon: Icons.home,
+                  bgColor: EstlColors.altColor1,
+                ),
+                AgendaCategCard(
+                  categName: 'Sport',
+                  numberOfTasks: 3,
+                  icon: Icons.sports_basketball_sharp,
+                  bgColor: myRed,
+                ),
+              ],
+            ),
           ),
         ],
       ),
