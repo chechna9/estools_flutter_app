@@ -1,4 +1,5 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:estools_mobile/components/agenda_categorie_card.dart';
 import 'package:estools_mobile/pages/agenda/action_card.dart';
 import 'package:estools_mobile/constants.dart';
@@ -137,77 +138,146 @@ class _AgendaPageState extends State<AgendaPage> {
           ),
         ),
         backgroundColor: myWhite,
-        body: Container(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-          child: Column(
-            children: [
-              // generate days from agenda
-              SizedBox(
-                height: 40,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: agenda.days.length,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            boxShadow: buttonBoxShadow,
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              setCurrentDay(index + 1);
-                            },
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 20),
-                              backgroundColor:
-                                  (index + 1) == currentDay ? myRed : myWhite,
-                              shape: RoundedRectangleBorder(
-                                side: (index + 1) == currentDay
-                                    ? BorderSide.none
-                                    : const BorderSide(),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
+        body: Column(
+          children: [
+            Flexible(
+              child: Container(
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                child: Column(
+                  children: [
+                    // generate days from agenda
+                    SizedBox(
+                      height: 40,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: agenda.days.length,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              Container(
+                                decoration: const BoxDecoration(
+                                  boxShadow: buttonBoxShadow,
+                                ),
+                                child: TextButton(
+                                  onPressed: () {
+                                    setCurrentDay(index + 1);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
+                                    backgroundColor: (index + 1) == currentDay
+                                        ? myRed
+                                        : myWhite,
+                                    shape: RoundedRectangleBorder(
+                                      side: (index + 1) == currentDay
+                                          ? BorderSide.none
+                                          : const BorderSide(),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'DAY ${index + 1}',
+                                    style: TextStyle(
+                                      color: (index + 1) == currentDay
+                                          ? myWhite
+                                          : myDark,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              'DAY ${index + 1}',
-                              style: TextStyle(
-                                color: (index + 1) == currentDay
-                                    ? myWhite
-                                    : myDark,
-                                fontWeight: FontWeight.w500,
+                              const SizedBox(
+                                width: 10,
                               ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                      ],
-                    );
-                  },
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: agenda.days[currentDay - 1].actions
+                            .map(
+                              (e) => ActionCard(action: e),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Flexible(
-                flex: 2,
-                child: ListView(
-                  children: agenda.days[currentDay - 1].actions
-                      .map(
-                        (e) => ActionCard(action: e),
-                      )
-                      .toList(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Expanded(
-                child: Footer(),
-              ),
-            ],
-          ),
+            ),
+            DraggableBottomSheet(
+              minExtent: 70,
+              useSafeArea: false,
+              curve: Curves.easeIn,
+              previewWidget: const PrevFooter(),
+              expandedWidget: const Footer(),
+              backgroundWidget: Container(),
+              barrierColor: Colors.transparent,
+              duration: const Duration(milliseconds: 10),
+              maxExtent: MediaQuery.of(context).size.height * 0.3,
+              onDragging: (pos) {},
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class PrevFooter extends StatelessWidget {
+  const PrevFooter({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: myDark,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Categories',
+            style: EstlTStyle.appBarTitle.copyWith(
+              color: myWhite,
+              fontSize: 20,
+            ),
+          ),
+          TextButton(
+              style: btnSyle,
+              onPressed: () {},
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'All',
+                    style: TextStyle(
+                      color: myWhite,
+                    ),
+                  ),
+                  Text(
+                    '18 task',
+                    style: TextStyle(
+                      color: myWhite,
+                      fontSize: 8,
+                      height: 0.5,
+                    ),
+                  ),
+                ],
+              ))
+        ],
       ),
     );
   }
