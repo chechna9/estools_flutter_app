@@ -10,18 +10,20 @@ const String registerRoute = '/register';
 const String loginRoute = '/login';
 const String agendaRoute = '/agenda';
 // box shadow
-const myBoxShadow = BoxDecoration(
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black38,
-      offset: Offset(
-        0.0,
-        10.0,
-      ),
-      blurRadius: 8.0,
-      spreadRadius: -6.0,
-    ),
-  ],
+const BoxShadow myBoxShadow = BoxShadow(
+  color: Colors.black38,
+  offset: Offset(
+    0.0,
+    10.0,
+  ),
+  blurRadius: 8.0,
+  spreadRadius: -6.0,
+);
+const BoxShadow catgFooterBoxShadow = BoxShadow(
+  color: Colors.black38,
+  offset: Offset(0, -2),
+  spreadRadius: 5,
+  blurRadius: 10,
 );
 const buttonBoxShadow = [
   BoxShadow(

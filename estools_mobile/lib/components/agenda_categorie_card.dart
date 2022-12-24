@@ -12,9 +12,10 @@ class AgendaCategCard extends StatelessWidget {
     return Container(
       width: EstlScreen.width(context) * 0.4,
       padding: const EdgeInsets.all(10),
-      decoration: myBoxShadow.copyWith(
+      decoration: BoxDecoration(
         color: EstlColors.altColor1,
         borderRadius: BorderRadius.circular(20),
+        boxShadow: const [myBoxShadow],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

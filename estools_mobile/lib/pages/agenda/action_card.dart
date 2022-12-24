@@ -44,9 +44,10 @@ class ActionCard extends StatelessWidget {
             flex: 3,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: myBoxShadow.copyWith(
+              decoration: BoxDecoration(
                 color: myGrey,
                 borderRadius: BorderRadius.circular(10),
+                boxShadow: [myBoxShadow],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

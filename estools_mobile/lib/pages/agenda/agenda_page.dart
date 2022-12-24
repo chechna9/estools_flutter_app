@@ -1,5 +1,3 @@
-import 'package:bottom_sheet/bottom_sheet.dart';
-import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:estools_mobile/components/agenda_categorie_card.dart';
 import 'package:estools_mobile/pages/agenda/action_card.dart';
 import 'package:estools_mobile/constants.dart';
@@ -209,75 +207,9 @@ class _AgendaPageState extends State<AgendaPage> {
                 ),
               ),
             ),
-            DraggableBottomSheet(
-              minExtent: 70,
-              useSafeArea: false,
-              curve: Curves.easeIn,
-              previewWidget: const PrevFooter(),
-              expandedWidget: const Footer(),
-              backgroundWidget: Container(),
-              barrierColor: Colors.transparent,
-              duration: const Duration(milliseconds: 10),
-              maxExtent: MediaQuery.of(context).size.height * 0.3,
-              onDragging: (pos) {},
-            ),
+            const Footer()
           ],
         ),
-      ),
-    );
-  }
-}
-
-class PrevFooter extends StatelessWidget {
-  const PrevFooter({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: myDark,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Categories',
-            style: EstlTStyle.appBarTitle.copyWith(
-              color: myWhite,
-              fontSize: 20,
-            ),
-          ),
-          TextButton(
-              style: btnSyle,
-              onPressed: () {},
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'All',
-                    style: TextStyle(
-                      color: myWhite,
-                    ),
-                  ),
-                  Text(
-                    '18 task',
-                    style: TextStyle(
-                      color: myWhite,
-                      fontSize: 8,
-                      height: 0.5,
-                    ),
-                  ),
-                ],
-              ))
-        ],
       ),
     );
   }
@@ -299,6 +231,9 @@ class Footer extends StatelessWidget {
           topLeft: Radius.circular(40),
           topRight: Radius.circular(40),
         ),
+        boxShadow: const [
+          catgFooterBoxShadow,
+        ],
       ),
       child: Column(
         children: [
@@ -337,7 +272,7 @@ class Footer extends StatelessWidget {
           ),
           // categories
           Column(
-            children: [
+            children: const [
               AgendaCategCard(),
             ],
           ),
