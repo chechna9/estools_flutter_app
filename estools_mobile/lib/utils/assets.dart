@@ -8,5 +8,5 @@ class EstlAssets {
   static const notesIm = "assets/images/pngs/notes_im.png";
   static const timerIm = "assets/images/pngs/timer_im.png";
   static const todoListIm = "assets/images/pngs/todoList_im.png";
-  static const google_logo = 'assets/images/pngs/logo_googleg_48dp.png';
+  static const googleLogo = 'assets/images/pngs/logo_googleg_48dp.png';
 }

@@ -154,7 +154,7 @@ class SIGoogle_Button extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            EstlAssets.google_logo,
+            EstlAssets.googleLogo,
             width: 32,
           ),
           const SizedBox(
