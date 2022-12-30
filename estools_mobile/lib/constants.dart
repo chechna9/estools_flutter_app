@@ -4,12 +4,17 @@ Color myDark = const Color(0xff33495e);
 Color myRed = const Color(0xffe74c3c);
 Color myGrey = const Color(0xffd9d9d9);
 Color myWhite = const Color(0xffeaeaea);
-
-const rn_login = '/login';
-const deco = const BoxDecoration(boxShadow: [
+// routes
+const String splashRoute = '/splashScreen';
+const String registerRoute = '/register';
+const String loginRoute = '/login';
+const String todolistRoute = '/ToDoList';
+const String notesRoute = '/Notes';
+// box shadow
+const myBoxShadow = BoxDecoration(boxShadow: [
   BoxShadow(
     color: Colors.black38,
-    offset: const Offset(
+    offset: Offset(
       0.0,
       10.0,
     ),
