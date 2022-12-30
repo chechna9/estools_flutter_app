@@ -30,6 +30,8 @@ class LoginPage extends StatelessWidget {
 }
 
 final _formKey = GlobalKey<FormState>();
+final TextEditingController emailCntrl = TextEditingController();
+final TextEditingController passwordCntrl = TextEditingController();
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -38,8 +40,6 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController emailCntrl = TextEditingController();
-    final TextEditingController passwordCntrl = TextEditingController();
     return Column(
       children: [
         Text(

@@ -32,6 +32,10 @@ class SignUp extends StatelessWidget {
 }
 
 final _formKey = GlobalKey<FormState>();
+final TextEditingController fnameCntrl = TextEditingController();
+final TextEditingController lnameCntrl = TextEditingController();
+final TextEditingController emailCntrl = TextEditingController();
+final TextEditingController passwordCntrl = TextEditingController();
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({
@@ -40,10 +44,6 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController fnameCntrl = TextEditingController();
-    final TextEditingController lnameCntrl = TextEditingController();
-    final TextEditingController emailCntrl = TextEditingController();
-    final TextEditingController passwordCntrl = TextEditingController();
     return Column(
       children: [
         Text(

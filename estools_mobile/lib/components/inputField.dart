@@ -2,33 +2,61 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class CustomInputField extends StatelessWidget {
+// borders
+OutlineInputBorder myOutlinedBorder({Color? color}) => OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      borderSide: BorderSide(
+        color: color ?? Colors.black,
+        width: 2,
+      ),
+    );
+
+class CustomInputField extends StatefulWidget {
   final String labelText;
   final bool obscured;
   final String? Function(String? e) validator;
   final TextEditingController controller;
-  const CustomInputField(
-      {super.key,
-      required this.labelText,
-      this.obscured = false,
-      required this.validator,
-      required this.controller});
-// borders
-  OutlineInputBorder myOutlinedBorder({Color? color}) => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: BorderSide(
-          color: color ?? Colors.black,
-          width: 2,
-        ),
-      );
+  const CustomInputField({
+    super.key,
+    required this.labelText,
+    this.obscured = false,
+    required this.validator,
+    required this.controller,
+  });
+
+  @override
+  State<CustomInputField> createState() => _CustomInputFieldState();
+}
+
+class _CustomInputFieldState extends State<CustomInputField> {
+  late bool hideShadow;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    hideShadow = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(boxShadow: [myBoxShadow]),
+      decoration: BoxDecoration(boxShadow: hideShadow ? [] : [myBoxShadow]),
       child: TextFormField(
-        controller: controller,
-        validator: (e) => validator(e),
-        obscureText: obscured,
+        controller: widget.controller,
+        validator: (e) {
+          final result = widget.validator(e);
+          if (result == null) {
+            setState(() {
+              hideShadow = false;
+            });
+          } else {
+            setState(() {
+              hideShadow = true;
+            });
+            return result;
+          }
+        },
+        obscureText: widget.obscured,
         decoration: InputDecoration(
           filled: true,
           alignLabelWithHint: true,
@@ -36,7 +64,8 @@ class CustomInputField extends StatelessWidget {
           focusedBorder: myOutlinedBorder(color: myDark),
           enabledBorder: myOutlinedBorder(color: Colors.transparent),
           errorBorder: myOutlinedBorder(color: myRed),
-          labelText: labelText,
+          focusedErrorBorder: myOutlinedBorder(color: myRed),
+          labelText: widget.labelText,
           labelStyle: TextStyle(
             fontWeight: FontWeight.w500,
             color: myDark.withOpacity(0.7),
@@ -62,31 +91,35 @@ class CustomPasswordInput extends StatefulWidget {
 }
 
 class _CustomPasswordInputState extends State<CustomPasswordInput> {
-// borders
-  OutlineInputBorder myOutlinedBorder({Color? color}) => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: BorderSide(
-          color: color ?? Colors.black,
-          width: 2,
-        ),
-      );
   late bool obscured;
+  late bool hideShadow;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     obscured = true;
+    hideShadow = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        boxShadow: [myBoxShadow],
-      ),
+      decoration: BoxDecoration(boxShadow: hideShadow ? [] : [myBoxShadow]),
       child: TextFormField(
         controller: widget.controller,
-        validator: (value) => widget.validator(value),
+        validator: (e) {
+          final result = widget.validator(e);
+          if (result == null) {
+            setState(() {
+              hideShadow = false;
+            });
+          } else {
+            setState(() {
+              hideShadow = true;
+            });
+            return result;
+          }
+        },
         obscureText: obscured,
         decoration: InputDecoration(
           filled: true,
@@ -95,6 +128,7 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
           focusedBorder: myOutlinedBorder(color: myDark),
           enabledBorder: myOutlinedBorder(color: Colors.transparent),
           errorBorder: myOutlinedBorder(color: myRed),
+          focusedErrorBorder: myOutlinedBorder(color: myRed),
           labelText: widget.labelText,
           labelStyle: TextStyle(
             fontWeight: FontWeight.w500,
