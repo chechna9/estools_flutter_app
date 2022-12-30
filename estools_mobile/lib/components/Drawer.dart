@@ -33,7 +33,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.home,
               color: myWhite,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, homeRoute);
+            },
           ),
           const SizedBox(
             height: 10,
@@ -45,7 +47,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.notes,
               color: myWhite,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, notesRoute);
+            },
           ),
           const SizedBox(
             height: 10,
@@ -57,7 +61,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.list,
               color: myWhite,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, todolistRoute);
+            },
           ),
           const SizedBox(
             height: 10,
@@ -69,7 +75,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.timer,
               color: myWhite,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, homeRoute);
+            },
           ),
           const SizedBox(
             height: 10,
@@ -81,7 +89,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.photo,
               color: myWhite,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, homeRoute);
+            },
           ),
           const SizedBox(
             height: 10,
@@ -93,7 +103,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.date_range_rounded,
               color: myWhite,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, agendaRoute);
+            },
           ),
           const SizedBox(
             height: 10,
@@ -105,7 +117,9 @@ class _MyDrawerState extends State<MyDrawer> {
               Icons.camera_alt,
               color: myWhite,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, homeRoute);
+            },
           ),
         ],
       ),
