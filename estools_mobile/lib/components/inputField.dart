@@ -18,7 +18,7 @@ class CustomInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: myBoxShadow,
+      decoration: const BoxDecoration(boxShadow: [myBoxShadow]),
       child: TextFormField(
         obscureText: obscured,
         decoration: InputDecoration(
@@ -67,7 +67,9 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: myBoxShadow,
+      decoration: const BoxDecoration(
+        boxShadow: [myBoxShadow],
+      ),
       child: TextFormField(
         obscureText: obscured,
         decoration: InputDecoration(
