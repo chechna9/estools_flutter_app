@@ -12,6 +12,7 @@ const String agendaRoute = '/agenda';
 const String homeRoute = '/home';
 const String todolistRoute = '/ToDoList';
 const String notesRoute = '/Notes';
+const String timerRoute = '/EsTimer';
 // box shadow
 const BoxShadow myBoxShadow = BoxShadow(
   color: Colors.black38,
