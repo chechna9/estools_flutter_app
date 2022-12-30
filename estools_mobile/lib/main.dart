@@ -1,5 +1,9 @@
 import 'package:estools_mobile/pages/Login.dart';
-import 'package:estools_mobile/pages/test.dart';
+import 'package:estools_mobile/pages/Sign_in.dart';
+import 'package:estools_mobile/pages/splash_screen.dart';
+import 'package:estools_mobile/pages/ToDoList.dart';
+import 'package:estools_mobile/pages/Notes.dart';
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -21,18 +25,21 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           // exapmple
           headlineMedium: TextStyle(
-            fontSize: 40.0,
+            fontSize: 24.0,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
       ),
       // second if you want that that the app start with it you have to set the initial route to the name of the rout
-      initialRoute: rn_login,
+      initialRoute: splashRoute,
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
-        '/test.dart': (context) => const Test(),
-        rn_login: (context) => LoginPage(),
+        splashRoute: (context) => const SplashScreen(),
+        registerRoute: (context) => const Signin(),
+        loginRoute: (context) => const LoginPage(),
+        todolistRoute: (context) => const TdlPage(),
+        notesRoute: (context) => const NotesPage(),
       },
     );
   }
