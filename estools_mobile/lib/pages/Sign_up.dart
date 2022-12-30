@@ -19,9 +19,10 @@ class SignUp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SvgPicture.asset(
-                "assets/images/svgs/logoBO.svg",
+                EstlAssets.logoBlueRed,
               ),
-              const RegisterForm(),
+              Flexible(
+                  child: SingleChildScrollView(child: const RegisterForm())),
             ],
           ),
         ),
@@ -30,6 +31,8 @@ class SignUp extends StatelessWidget {
   }
 }
 
+final _formKey = GlobalKey<FormState>();
+
 class RegisterForm extends StatelessWidget {
   const RegisterForm({
     Key? key,
@@ -37,6 +40,10 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController fnameCntrl = TextEditingController();
+    final TextEditingController lnameCntrl = TextEditingController();
+    final TextEditingController emailCntrl = TextEditingController();
+    final TextEditingController passwordCntrl = TextEditingController();
     return Column(
       children: [
         Text(
@@ -51,24 +58,33 @@ class RegisterForm extends StatelessWidget {
           height: 20,
         ),
         Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomInputField(
+              CustomInputField(
                 labelText: 'First Name',
+                controller: fnameCntrl,
+                validator: (e) => e!.isEmpty ? 'required field' : null,
               ),
               const SizedBox(height: 15),
-              const CustomInputField(
+              CustomInputField(
                 labelText: 'Last Name',
+                controller: lnameCntrl,
+                validator: (e) => e!.isEmpty ? 'required field' : null,
               ),
               const SizedBox(height: 15),
-              const CustomInputField(
+              CustomInputField(
                 labelText: 'Email',
+                controller: emailCntrl,
+                validator: (e) => e!.isEmpty ? 'required field' : null,
               ),
               const SizedBox(height: 15),
-              const CustomPasswordInput(
+              CustomPasswordInput(
                 labelText: 'Password',
+                controller: passwordCntrl,
+                validator: (e) => e!.length < 6 ? 'at least 6 character' : null,
               ),
               TextButton(
                 onPressed: () {
@@ -129,7 +145,11 @@ class SignUp_Button extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {},
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+          Navigator.of(context).pushNamed(homeRoute);
+        }
+      },
     );
   }
 }
@@ -172,7 +192,11 @@ class SIGoogle_Button extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {},
+      onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("coming soon"),
+        ));
+      },
     );
   }
 }

@@ -5,8 +5,14 @@ import '../constants.dart';
 class CustomInputField extends StatelessWidget {
   final String labelText;
   final bool obscured;
+  final String? Function(String? e) validator;
+  final TextEditingController controller;
   const CustomInputField(
-      {super.key, required this.labelText, this.obscured = false});
+      {super.key,
+      required this.labelText,
+      this.obscured = false,
+      required this.validator,
+      required this.controller});
 // borders
   OutlineInputBorder myOutlinedBorder({Color? color}) => OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
@@ -20,6 +26,8 @@ class CustomInputField extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(boxShadow: [myBoxShadow]),
       child: TextFormField(
+        controller: controller,
+        validator: (e) => validator(e),
         obscureText: obscured,
         decoration: InputDecoration(
           filled: true,
@@ -41,7 +49,13 @@ class CustomInputField extends StatelessWidget {
 
 class CustomPasswordInput extends StatefulWidget {
   final String labelText;
-  const CustomPasswordInput({super.key, required this.labelText});
+  final String? Function(String? e) validator;
+  final TextEditingController controller;
+  const CustomPasswordInput(
+      {super.key,
+      required this.labelText,
+      required this.validator,
+      required this.controller});
 
   @override
   State<CustomPasswordInput> createState() => _CustomPasswordInputState();
@@ -71,6 +85,8 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
         boxShadow: [myBoxShadow],
       ),
       child: TextFormField(
+        controller: widget.controller,
+        validator: (value) => widget.validator(value),
         obscureText: obscured,
         decoration: InputDecoration(
           filled: true,

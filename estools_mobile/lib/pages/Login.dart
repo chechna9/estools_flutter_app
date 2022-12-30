@@ -1,5 +1,6 @@
 import 'package:estools_mobile/components/inputField.dart';
 import 'package:estools_mobile/constants.dart';
+import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,7 +18,7 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SvgPicture.asset(
-                "assets/images/svgs/logoBO.svg",
+                EstlAssets.logoBlueRed,
               ),
               const LoginForm(),
             ],
@@ -28,6 +29,8 @@ class LoginPage extends StatelessWidget {
   }
 }
 
+final _formKey = GlobalKey<FormState>();
+
 class LoginForm extends StatelessWidget {
   const LoginForm({
     Key? key,
@@ -35,6 +38,8 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailCntrl = TextEditingController();
+    final TextEditingController passwordCntrl = TextEditingController();
     return Column(
       children: [
         Text(
@@ -49,16 +54,21 @@ class LoginForm extends StatelessWidget {
           height: 20,
         ),
         Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomInputField(
+              CustomInputField(
                 labelText: 'Email',
+                controller: emailCntrl,
+                validator: (e) => e!.isEmpty ? 'required field' : null,
               ),
               const SizedBox(height: 15),
-              const CustomPasswordInput(
+              CustomPasswordInput(
                 labelText: 'Password',
+                controller: passwordCntrl,
+                validator: (e) => e!.isEmpty ? 'required field' : null,
               ),
               const SizedBox(height: 20),
               TextButton(
@@ -71,7 +81,11 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("coming soon"),
+                  ));
+                },
                 child: const Text(
                   "forget your password ?",
                   style: TextStyle(color: Colors.black),
@@ -127,7 +141,11 @@ class Login_Button extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {},
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+          Navigator.of(context).pushNamed(homeRoute);
+        }
+      },
     );
   }
 }
@@ -152,7 +170,7 @@ class SIGoogle_Button extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            'assets/images/pngs/logo_googleg_48dp.png',
+            EstlAssets.googleLogo,
             width: 32,
           ),
           const SizedBox(
@@ -170,7 +188,11 @@ class SIGoogle_Button extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {},
+      onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("coming soon"),
+        ));
+      },
     );
   }
 }
