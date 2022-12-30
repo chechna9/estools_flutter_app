@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.notesIm,
                   onPressed: () {
-                    print("holla");
+                    Navigator.of(context).pushReplacementNamed(notesRoute);
                   },
                 ),
                 HomeItem(
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.todoListIm,
                   onPressed: () {
-                    print("holla");
+                    Navigator.of(context).pushReplacementNamed(todolistRoute);
                   },
                 ),
                 HomeItem(
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.timerIm,
                   onPressed: () {
-                    print("holla");
+                    Navigator.of(context).pushReplacementNamed(homeRoute);
                   },
                 ),
                 HomeItem(
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.gallerieIm,
                   onPressed: () {
-                    print("holla");
+                    Navigator.of(context).pushReplacementNamed(homeRoute);
                   },
                 ),
                 HomeItem(
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.agendaIm,
                   onPressed: () {
-                    print("holla");
+                    Navigator.of(context).pushReplacementNamed(agendaRoute);
                   },
                 ),
                 HomeItem(
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.cameraIm,
                   onPressed: () {
-                    print("holla");
+                    Navigator.of(context).pushReplacementNamed(homeRoute);
                   },
                 ),
               ],
