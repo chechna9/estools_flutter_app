@@ -1,10 +1,11 @@
 import 'package:estools_mobile/components/inputField.dart';
+import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Signin extends StatelessWidget {
-  const Signin({super.key});
+class SignUp extends StatelessWidget {
+  const SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +154,7 @@ class SIGoogle_Button extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            'assets/images/pngs/logo_googleg_48dp.png',
+            EstlAssets.google_logo,
             width: 32,
           ),
           const SizedBox(

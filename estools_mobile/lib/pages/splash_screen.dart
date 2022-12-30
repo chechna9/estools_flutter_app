@@ -1,3 +1,4 @@
+import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +27,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SvgPicture.asset(
-              "assets/images/svgs/logoWO.svg",
+              EstlAssets.logoWO,
             ),
             Text(
               "Every Student's Tool",
