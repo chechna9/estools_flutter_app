@@ -1,14 +1,12 @@
+import 'package:estools_mobile/components/Drawer.dart';
 import 'package:estools_mobile/components/agenda_categorie_card.dart';
 import 'package:estools_mobile/pages/agenda/action_card.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:estools_mobile/models/action_model.dart';
 import 'package:estools_mobile/models/agenda_model.dart';
-import 'package:estools_mobile/models/agenda_model.dart';
 import 'package:estools_mobile/models/day_model.dart';
 import 'package:estools_mobile/utils/colors.dart';
-import 'package:estools_mobile/utils/screen_dim.dart';
 import 'package:estools_mobile/utils/text_style.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class AgendaPage extends StatefulWidget {
@@ -129,14 +127,19 @@ class _AgendaPageState extends State<AgendaPage> {
     });
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: MyDrawer(),
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              _scaffoldKey.currentState!.openDrawer();
+            },
+            icon: const Icon(Icons.menu),
           ),
           backgroundColor: myDark,
           centerTitle: true,
