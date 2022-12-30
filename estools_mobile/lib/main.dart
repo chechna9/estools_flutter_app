@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // second if you want that that the app start with it you have to set the initial route to the name of the rout
-      initialRoute: todolistRoute,
+      initialRoute: notesRoute,
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
         splashRoute: (context) => const SplashScreen(),
