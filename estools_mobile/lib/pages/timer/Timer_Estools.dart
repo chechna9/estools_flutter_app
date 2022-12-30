@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:estools_mobile/components/Drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:estools_mobile/utils/text_style.dart';
@@ -64,15 +65,19 @@ class _EsTimerState extends State<EsTimer> {
       );
 
   int _currentIndex = 0;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Material(
         child: Scaffold(
+      key: _scaffoldKey,
+      drawer: const MyDrawer(),
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          icon: const Icon(Icons.menu),
         ),
         backgroundColor: myDark,
         centerTitle: true,

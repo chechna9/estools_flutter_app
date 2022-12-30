@@ -76,7 +76,7 @@ class _MyDrawerState extends State<MyDrawer> {
               color: myWhite,
             ),
             onTap: () {
-              Navigator.pushReplacementNamed(context, homeRoute);
+              Navigator.pushReplacementNamed(context, timerRoute);
             },
           ),
           const SizedBox(

@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.timerIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(homeRoute);
+                    Navigator.of(context).pushReplacementNamed(timerRoute);
                   },
                 ),
                 HomeItem(

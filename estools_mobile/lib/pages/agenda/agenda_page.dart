@@ -133,7 +133,7 @@ class _AgendaPageState extends State<AgendaPage> {
     return Material(
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(),
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
