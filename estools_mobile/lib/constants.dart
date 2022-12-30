@@ -28,7 +28,17 @@ const BoxShadow catgFooterBoxShadow = BoxShadow(
   spreadRadius: 5,
   blurRadius: 10,
 );
-
+const buttonBoxShadow = [
+  BoxShadow(
+    color: Colors.black38,
+    offset: Offset(
+      0.0,
+      10.0,
+    ),
+    blurRadius: 8.0,
+    spreadRadius: -6.0,
+  ),
+];
 // button style form
 ButtonStyle btnSyle = TextButton.styleFrom(
   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
