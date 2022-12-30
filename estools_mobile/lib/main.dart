@@ -3,6 +3,10 @@ import 'package:estools_mobile/pages/Sign_up.dart';
 import 'package:estools_mobile/pages/agenda/agenda_page.dart';
 import 'package:estools_mobile/pages/home.dart';
 import 'package:estools_mobile/pages/splash_screen.dart';
+import 'package:estools_mobile/pages/splash_screen.dart';
+import 'package:estools_mobile/pages/ToDoList.dart';
+import 'package:estools_mobile/pages/Notes.dart';
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -31,14 +35,16 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // second if you want that that the app start with it you have to set the initial route to the name of the rout
-      initialRoute: splashRoute,
+      initialRoute: todolistRoute,
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
         splashRoute: (context) => const SplashScreen(),
         registerRoute: (context) => const SignUp(),
         loginRoute: (context) => const LoginPage(),
         agendaRoute: (context) => const AgendaPage(),
-        homeRoute: ((context) => const HomePage())
+        homeRoute: ((context) => const HomePage()),
+        todolistRoute: (context) => const TdlPage(),
+        notesRoute: (context) => const NotesPage(),
       },
     );
   }
