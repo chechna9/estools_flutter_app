@@ -1,6 +1,8 @@
 import 'package:estools_mobile/pages/Login.dart';
 import 'package:estools_mobile/pages/Sign_up.dart';
 import 'package:estools_mobile/pages/agenda/agenda_page.dart';
+import 'package:estools_mobile/pages/camera_page.dart';
+import 'package:estools_mobile/pages/gallerie_page.dart';
 import 'package:estools_mobile/pages/home.dart';
 import 'package:estools_mobile/pages/splash_screen.dart';
 import 'package:estools_mobile/pages/splash_screen.dart';
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
         todolistRoute: (context) => const TdlPage(),
         notesRoute: (context) => const NotesPage(),
         timerRoute: (context) => const EsTimer(),
+        cameraRoute: (context) => const CameraPage(),
+        gallerieRoute: (context) => const GalleriePage(),
       },
     );
   }

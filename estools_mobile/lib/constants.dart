@@ -13,6 +13,8 @@ const String homeRoute = '/home';
 const String todolistRoute = '/ToDoList';
 const String notesRoute = '/Notes';
 const String timerRoute = '/EsTimer';
+const String cameraRoute = '/camera';
+const String gallerieRoute = '/gallerie';
 // box shadow
 const BoxShadow myBoxShadow = BoxShadow(
   color: Colors.black38,

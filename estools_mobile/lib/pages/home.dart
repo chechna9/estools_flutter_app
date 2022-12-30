@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.gallerieIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(homeRoute);
+                    Navigator.of(context).pushReplacementNamed(gallerieRoute);
                   },
                 ),
                 HomeItem(
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.cameraIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(homeRoute);
+                    Navigator.of(context).pushReplacementNamed(cameraRoute);
                   },
                 ),
               ],

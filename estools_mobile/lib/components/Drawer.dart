@@ -90,7 +90,7 @@ class _MyDrawerState extends State<MyDrawer> {
               color: myWhite,
             ),
             onTap: () {
-              Navigator.pushReplacementNamed(context, homeRoute);
+              Navigator.pushReplacementNamed(context, gallerieRoute);
             },
           ),
           const SizedBox(
@@ -118,7 +118,7 @@ class _MyDrawerState extends State<MyDrawer> {
               color: myWhite,
             ),
             onTap: () {
-              Navigator.pushReplacementNamed(context, homeRoute);
+              Navigator.pushReplacementNamed(context, cameraRoute);
             },
           ),
         ],
