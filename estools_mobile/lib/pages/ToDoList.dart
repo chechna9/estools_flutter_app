@@ -1,4 +1,6 @@
+import 'package:estools_mobile/components/Drawer.dart';
 import 'package:estools_mobile/constants.dart';
+import 'package:estools_mobile/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -8,10 +10,27 @@ class TdlPage extends StatelessWidget {
   const TdlPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: const MyDrawer(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          icon: const Icon(Icons.menu),
+        ),
+        backgroundColor: myDark,
+        centerTitle: true,
+        title: Text(
+          'Todo List',
+          style: EstlTStyle.appBarTitle,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
           color: myWhite,
           child: const TasksScreen(),
         ),
@@ -31,7 +50,6 @@ class TasksScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       // mainAxisSize: MainAxisSize.max,
       children: [
-        const MytasksBar(),
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
@@ -79,52 +97,6 @@ class TasksScreen extends StatelessWidget {
         ),
         const Categories(),
       ],
-    );
-  }
-}
-
-class MytasksBar extends StatelessWidget {
-  const MytasksBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: ShapeDecoration(
-        color: myDark,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.zero,
-            topLeft: Radius.zero,
-            bottomRight: Radius.zero,
-            topRight: Radius.zero,
-          ),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 25, bottom: 10, left: 0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Icon(
-              Icons.arrow_back_ios_new_outlined,
-              color: myWhite,
-            ),
-            const SizedBox(width: 100),
-            Text(
-              'My tasks',
-              style: TextStyle(
-                fontSize: 26,
-                color: myWhite,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
