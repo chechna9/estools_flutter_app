@@ -9,6 +9,7 @@ const String splashRoute = '/splashScreen';
 const String registerRoute = '/register';
 const String loginRoute = '/login';
 const String agendaRoute = '/agenda';
+const String timerRoute = '/EsTimer';
 // box shadow
 const BoxShadow myBoxShadow = BoxShadow(
   color: Colors.black38,
