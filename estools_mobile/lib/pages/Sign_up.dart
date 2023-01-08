@@ -3,6 +3,8 @@ import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:estools_mobile/models/index.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -41,6 +43,37 @@ class RegisterForm extends StatelessWidget {
   const RegisterForm({
     Key? key,
   }) : super(key: key);
+
+  void _signup(String email, String password, String firstname, String lastname,
+      BuildContext context) async {
+    UserModel _userModel = Provider.of<UserModel>(context, listen: false);
+    try {
+      if (await (_userModel.signup(email, password, firstname, lastname)
+              as Future<FormSubmissionResponse>)
+          .then((value) => value.isValid)) {
+        print("I'm pushing");
+        Navigator.of(context).pushNamed(loginRoute);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void handleSubmitted(BuildContext context) async {
+    final FormState? form = _formKey.currentState;
+    if (_formKey.currentState!.validate()) {
+      form!.save();
+      print("emailCntrl.text " +
+          emailCntrl.text +
+          ", passwordCntrl.text " +
+          passwordCntrl.text);
+
+      _signup(emailCntrl.text, passwordCntrl.text, fnameCntrl.text,
+          lnameCntrl.text, context);
+
+      // Navigator.of(context).pushNamed(homeRoute);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +129,16 @@ class RegisterForm extends StatelessWidget {
                 ),
               ),
               Row(
-                children: const [
+                children: [
                   Flexible(child: SIGoogle_Button()),
                   SizedBox(
                     width: 10,
                   ),
-                  Flexible(child: SignUp_Button()),
+                  Flexible(
+                    child: SignUp_Button(
+                      onPressed: () => handleSubmitted(context),
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -115,8 +152,10 @@ class RegisterForm extends StatelessWidget {
 class SignUp_Button extends StatelessWidget {
   const SignUp_Button({
     Key? key,
+    required this.onPressed,
   }) : super(key: key);
 
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -145,11 +184,7 @@ class SignUp_Button extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          Navigator.of(context).pushNamed(homeRoute);
-        }
-      },
+      onPressed: onPressed,
     );
   }
 }
