@@ -14,9 +14,7 @@ class FilterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        onPressed();
-      },
+      onPressed: () => onPressed(),
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         backgroundColor: activated ? myRed : myWhite,
