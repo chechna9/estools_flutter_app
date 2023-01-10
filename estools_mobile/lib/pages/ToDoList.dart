@@ -29,6 +29,7 @@ class TdlPage extends StatelessWidget {
           style: EstlTStyle.appBarTitle,
         ),
       ),
+      backgroundColor: myWhite,
       body: SingleChildScrollView(
         child: Container(
           color: myWhite,
@@ -48,10 +49,10 @@ class TasksScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
-      // mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
+          // buttons
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
