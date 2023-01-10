@@ -1,14 +1,9 @@
-import 'package:estools_mobile/service/api.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'index.dart';
-import 'package:dio/dio.dart';
-
-String baseUrl = "http://192.168.100.11:8085/";
+import '../service/consts.dart';
 
 class UserModel with ChangeNotifier {
   String? _userId;
@@ -24,17 +19,11 @@ class UserModel with ChangeNotifier {
       String? lastname,
       String? configuration,
       String? email}) {
-    this._userId = userId;
-    this._firstname = firstname;
-    this._lastname = lastname;
-    this._configuration = configuration;
-    this._email = email;
-
-    this._userId;
-    this._firstname;
-    this._lastname;
-    this._email;
-    this._configuration;
+    _userId = userId;
+    _firstname = firstname;
+    _lastname = lastname;
+    _configuration = configuration;
+    _email = email;
   }
 
   // Properties
@@ -81,13 +70,12 @@ class UserModel with ChangeNotifier {
     return data;
   }
 
-  Future<FormSubmissionResponse> signup(
+  Future<RequestSubmissionResponse> signup(
       String email, String password, String firstname, String lastname) async {
-    FormSubmissionResponse returnValue =
-        FormSubmissionResponse(isValid: false, message: "Try Again");
-    ApiResponse _apiResponse = new ApiResponse();
+    RequestSubmissionResponse returnValue =
+        RequestSubmissionResponse(isValid: false, message: "Try Again");
     try {
-      var url = Uri.parse(baseUrl + 'auth/signup');
+      var url = Uri.parse('${apiBaseUrl}auth/signup');
 
       final response = await http.post(url, body: {
         'email': email,
@@ -126,13 +114,13 @@ class UserModel with ChangeNotifier {
     return returnValue;
   }
 
-  Future<FormSubmissionResponse> signin(String email, String password) async {
-    FormSubmissionResponse returnValue =
-        FormSubmissionResponse(isValid: false, message: "Try Again");
-    ApiResponse _apiResponse = new ApiResponse();
+  Future<RequestSubmissionResponse> signin(
+      String email, String password) async {
+    RequestSubmissionResponse returnValue =
+        RequestSubmissionResponse(isValid: false, message: "Try Again");
 
     try {
-      var url = Uri.parse(baseUrl + 'auth/signin');
+      var url = Uri.parse(apiBaseUrl + 'auth/signin');
       print(url);
       final response = await http.post(
         url,
