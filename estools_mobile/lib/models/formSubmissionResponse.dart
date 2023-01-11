@@ -1,6 +1,6 @@
-class FormSubmissionResponse {
+class RequestSubmissionResponse {
   bool isValid;
   String message;
 
-  FormSubmissionResponse({required this.isValid, required this.message});
+  RequestSubmissionResponse({required this.isValid, required this.message});
 }

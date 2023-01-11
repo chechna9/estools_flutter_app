@@ -49,7 +49,7 @@ class RegisterForm extends StatelessWidget {
     UserModel _userModel = Provider.of<UserModel>(context, listen: false);
     try {
       if (await (_userModel.signup(email, password, firstname, lastname)
-              as Future<FormSubmissionResponse>)
+              as Future<RequestSubmissionResponse>)
           .then((value) => value.isValid)) {
         print("I'm pushing");
         Navigator.of(context).pushNamed(loginRoute);

@@ -1,3 +1,1 @@
-
-
-String apiBaseUrl = "http://192.168.100.11:8085/";
+String apiBaseUrl = "http://192.168.39.148:8085/";

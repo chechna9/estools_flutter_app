@@ -18,7 +18,14 @@ import 'constants.dart';
 
 void main() {
   runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (context) => UserModel())],
+    providers: [
+      ChangeNotifierProvider(create: (context) => UserModel()),
+      ChangeNotifierProxyProvider<UserModel, ConfigurationModel>(
+        update: (context, user, previousConfiguration) =>
+            ConfigurationModel(user: user),
+        create: (BuildContext context) => ConfigurationModel(user: null),
+      )
+    ],
     child: MyApp(),
   ));
 }

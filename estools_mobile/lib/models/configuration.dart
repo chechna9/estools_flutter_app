@@ -7,14 +7,21 @@ import 'dart:convert' as convert;
 
 class ConfigurationModel with ChangeNotifier {
   late String _title;
+  late String _id;
   late List<Note> _notes;
   late String _token;
   ConfigurationModel({
-    required String token,
-    required String title,
+    // required String token,
+    // required String title,
+    required UserModel? user,
   }) {
-    _title = title;
-    _token = token;
+    if (user != null) {
+      _id = user.configuration[0];
+      _token = user.token;
+      _fetchConfig();
+    }
+    // _title = title;
+    // _token = token;
   }
   String get title => _title;
   set title(String title) => {_title = title};
@@ -32,6 +39,33 @@ class ConfigurationModel with ChangeNotifier {
   _fromJson(Map<String, dynamic> data) {
     _title = data['title'];
     _notes = data['notes'].map((note) => Note.fromJson(note));
+  }
+
+  _fetchConfig() async {
+    try {
+      var url = Uri.parse('${apiBaseUrl}user/config');
+      print(url);
+      final response = await http.get(
+        url,
+        headers: {'x-access-token': _token},
+      ).timeout(Duration(seconds: 10));
+
+      final data = convert.jsonDecode(response.body);
+      switch (response.statusCode) {
+        case 200:
+          print(200);
+          //updating the user data
+          _fromJson(data);
+          break;
+        case 401:
+          print("400" + convert.jsonDecode(response.body)['message']);
+          break;
+        default:
+          print("on default");
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<RequestSubmissionResponse> _syncConfig() async {
@@ -73,6 +107,7 @@ class ConfigurationModel with ChangeNotifier {
     return returnValue;
   }
 
+//notes methods
   Future<RequestSubmissionResponse> setNote(Note note) async {
     RequestSubmissionResponse returnValue =
         RequestSubmissionResponse(isValid: false, message: "Action Failed!");
@@ -94,6 +129,7 @@ class ConfigurationModel with ChangeNotifier {
   }
 }
 
+//notes class
 class Note {
   String id;
   String title;
