@@ -1,5 +1,5 @@
 import 'package:estools_mobile/components/Drawer.dart';
-import 'package:estools_mobile/components/agenda_categorie_card.dart';
+import 'package:estools_mobile/pages/agenda/agenda_categorie_card.dart';
 import 'package:estools_mobile/components/filter_button.dart';
 import 'package:estools_mobile/pages/agenda/action_card.dart';
 import 'package:estools_mobile/constants.dart';

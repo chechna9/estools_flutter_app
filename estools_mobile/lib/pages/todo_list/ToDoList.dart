@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:estools_mobile/components/Drawer.dart';
 import 'package:estools_mobile/components/filter_button.dart';
+import 'package:estools_mobile/pages/todo_list/categ_tdl_card.dart';
 import 'package:estools_mobile/pages/todo_list/task_card.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:estools_mobile/utils/screen_dim.dart';
@@ -122,212 +123,6 @@ class TasksScreen extends StatelessWidget {
   }
 }
 
-class CategoriesScroller extends StatelessWidget {
-  const CategoriesScroller({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          alignment: Alignment.topCenter,
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 150,
-                margin: const EdgeInsets.only(right: 40),
-                height: 140,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black38,
-                        offset: Offset(
-                          0.0,
-                          11.0,
-                        ),
-                        blurRadius: 8.0,
-                        spreadRadius: -5.0,
-                      ),
-                    ],
-                    color: myRed,
-                    borderRadius: const BorderRadius.all(Radius.circular(20))),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Home Work",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: myWhite,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "10 tasks",
-                        style: TextStyle(fontSize: 12, color: myWhite),
-                      ),
-                      const SizedBox(height: 10),
-                      LinearPercentIndicator(
-                        width: 125,
-                        lineHeight: 8,
-                        backgroundColor: myWhite,
-                        progressColor: const Color(0xff85C138),
-                        percent: 0.8,
-                        alignment: MainAxisAlignment.center,
-                        barRadius: const Radius.circular(20),
-                      ),
-                      const SizedBox(height: 5),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              "8/10",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12, color: myWhite),
-                            ),
-                          ]),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 150,
-                margin: const EdgeInsets.only(right: 40),
-                height: 140,
-                decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black38,
-                        offset: Offset(
-                          0.0,
-                          11.0,
-                        ),
-                        blurRadius: 8.0,
-                        spreadRadius: -5.0,
-                      ),
-                    ],
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Sport",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: myWhite,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "5 tasks",
-                        style: TextStyle(fontSize: 12, color: myWhite),
-                      ),
-                      const SizedBox(height: 10),
-                      LinearPercentIndicator(
-                        width: 125,
-                        lineHeight: 8,
-                        backgroundColor: myWhite,
-                        progressColor: const Color(0xff85C138),
-                        percent: 0.4,
-                        alignment: MainAxisAlignment.center,
-                        barRadius: const Radius.circular(20),
-                      ),
-                      const SizedBox(height: 5),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              "2/5",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12, color: myWhite),
-                            ),
-                          ]),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 150,
-                margin: const EdgeInsets.only(right: 40),
-                height: 140,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black38,
-                        offset: Offset(
-                          0.0,
-                          11.0,
-                        ),
-                        blurRadius: 8.0,
-                        spreadRadius: -5.0,
-                      ),
-                    ],
-                    color: myRed,
-                    borderRadius: const BorderRadius.all(Radius.circular(20))),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Home Work",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: myWhite,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "10 tasks",
-                        style: TextStyle(fontSize: 12, color: myWhite),
-                      ),
-                      const SizedBox(height: 10),
-                      LinearPercentIndicator(
-                        width: 125,
-                        lineHeight: 8,
-                        backgroundColor: myWhite,
-                        progressColor: const Color(0xff85C138),
-                        percent: 0.8,
-                        alignment: MainAxisAlignment.center,
-                        barRadius: const Radius.circular(20),
-                      ),
-                      const SizedBox(height: 5),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              "8/10",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12, color: myWhite),
-                            ),
-                          ]),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class Categories extends StatelessWidget {
   const Categories({
     Key? key,
@@ -377,7 +172,16 @@ class Categories extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CategoriesScroller(),
+            Row(
+              children: [
+                TdlCategCard(
+                    categName: 'Home Work',
+                    numberOfTasks: 15,
+                    icon: Icons.home,
+                    bgColor: Colors.red,
+                    progress: 15)
+              ],
+            ),
           ],
         ),
       ),

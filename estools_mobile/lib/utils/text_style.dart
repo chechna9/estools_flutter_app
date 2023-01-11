@@ -5,5 +5,5 @@ class EstlTStyle {
   static TextStyle appBarTitle =
       const TextStyle(fontWeight: FontWeight.w500, fontSize: 26);
   static TextStyle categorieTitle =
-      TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: myWhite);
+      TextStyle(fontWeight: FontWeight.w900, fontSize: 20, color: myWhite);
 }
