@@ -1,19 +1,20 @@
-import 'dart:ffi';
-
 import 'package:estools_mobile/components/Drawer.dart';
 import 'package:estools_mobile/components/filter_button.dart';
 import 'package:estools_mobile/pages/todo_list/categ_tdl_card.dart';
 import 'package:estools_mobile/pages/todo_list/task_card.dart';
 import 'package:estools_mobile/constants.dart';
-import 'package:estools_mobile/utils/screen_dim.dart';
+
 import 'package:estools_mobile/utils/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
-class TdlPage extends StatelessWidget {
+class TdlPage extends StatefulWidget {
   const TdlPage({Key? key}) : super(key: key);
+
+  @override
+  State<TdlPage> createState() => _TdlPageState();
+}
+
+class _TdlPageState extends State<TdlPage> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -35,90 +36,127 @@ class TdlPage extends StatelessWidget {
           style: EstlTStyle.appBarTitle,
         ),
       ),
-      body: Container(
-        color: myWhite,
-        child: const TasksScreen(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: myRed,
+        child: Icon(
+          Icons.add_rounded,
+          size: 40,
+        ),
+        onPressed: () {},
       ),
+      backgroundColor: myWhite,
+      body: const TasksScreen(),
     );
   }
 }
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   const TasksScreen({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 0, left: 20, right: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              // filter buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  FilterButton(
-                    title: 'In progress',
-                    onPressed: () {},
-                  ),
-                  FilterButton(
-                    title: 'Completed',
-                    onPressed: () {},
-                    activated: false,
-                  ),
-                  FilterButton(
-                    title: 'Archived',
-                    onPressed: () {},
-                    activated: false,
-                  ),
-                ],
-              ),
-              TaskCard(
-                title: 'Home Work',
-                startDate: '18 Nov',
-                endDate: '23 Nov',
-                progress: 60,
-                onComplete: () {},
-                onArchive: () {},
-                onDelete: () {},
-              ),
-              TaskCard(
-                title: 'Home Work',
-                startDate: '18 Nov',
-                endDate: '23 Nov',
-                progress: 60,
-                onComplete: () {},
-                onArchive: () {},
-                onDelete: () {},
-              ),
+    bool isModal = true;
 
-              const SizedBox(height: 70),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: myRed,
-                  padding: const EdgeInsets.all(10),
-                  shape: const CircleBorder(),
-                ),
-                onPressed: () {},
-                child: Icon(
-                  Icons.add,
-                  color: myWhite,
-                  size: 40,
-                ),
-              ),
-              //const SizedBox(height: 10),
-            ],
+    void _showCateg(BuildContext ctx) {
+      setState(() {
+        isModal = true;
+      });
+      showModalBottomSheet(
+        barrierColor: Colors.transparent,
+        isDismissible: true,
+        enableDrag: true,
+        isScrollControlled: true,
+        elevation: 0,
+        context: ctx,
+        builder: (ctx) => FractionallySizedBox(
+          heightFactor: 0.35,
+          child: Container(
+            color: myWhite,
+            child: const Categories(),
           ),
         ),
-        const Categories(),
-      ],
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 0, left: 20, right: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // filter buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FilterButton(
+                title: 'In progress',
+                onPressed: () {},
+              ),
+              FilterButton(
+                title: 'Completed',
+                onPressed: () {},
+                activated: false,
+              ),
+              FilterButton(
+                title: 'Archived',
+                onPressed: () {},
+                activated: false,
+              ),
+            ],
+          ),
+          Flexible(
+            child: ListView(
+              children: [
+                TaskCard(
+                  title: 'Home Work',
+                  startDate: '18 Nov',
+                  endDate: '23 Nov',
+                  progress: 60,
+                  onComplete: () {},
+                  onArchive: () {},
+                  onDelete: () {},
+                ),
+                TaskCard(
+                  title: 'Home Work',
+                  startDate: '18 Nov',
+                  endDate: '23 Nov',
+                  progress: 60,
+                  onComplete: () {},
+                  onArchive: () {},
+                  onDelete: () {},
+                ),
+              ],
+            ),
+          ),
+          Container(
+            alignment: Alignment.bottomLeft,
+            margin: const EdgeInsets.symmetric(vertical: 20),
+            child: TextButton(
+              onPressed: () {
+                _showCateg(context);
+              },
+              style: TextButton.styleFrom(
+                  backgroundColor: myDark,
+                  padding: const EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  )),
+              child: Text(
+                'Home Work',
+                style: EstlTStyle.categorieTitle,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
