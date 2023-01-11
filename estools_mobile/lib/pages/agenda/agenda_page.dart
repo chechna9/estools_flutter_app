@@ -1,5 +1,6 @@
 import 'package:estools_mobile/components/Drawer.dart';
-import 'package:estools_mobile/components/agenda_categorie_card.dart';
+import 'package:estools_mobile/pages/agenda/agenda_categorie_card.dart';
+import 'package:estools_mobile/components/filter_button.dart';
 import 'package:estools_mobile/pages/agenda/action_card.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:estools_mobile/models/action_model.dart';
@@ -169,34 +170,12 @@ class _AgendaPageState extends State<AgendaPage> {
                                 decoration: const BoxDecoration(
                                   boxShadow: buttonBoxShadow,
                                 ),
-                                child: TextButton(
+                                child: FilterButton(
                                   onPressed: () {
                                     setCurrentDay(index + 1);
                                   },
-                                  style: TextButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 20),
-                                    backgroundColor: (index + 1) == currentDay
-                                        ? myRed
-                                        : myWhite,
-                                    shape: RoundedRectangleBorder(
-                                      side: (index + 1) == currentDay
-                                          ? BorderSide.none
-                                          : const BorderSide(),
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'DAY ${index + 1}',
-                                    style: TextStyle(
-                                      color: (index + 1) == currentDay
-                                          ? myWhite
-                                          : myDark,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
+                                  title: 'DAY ${index + 1}',
+                                  activated: (index + 1) == currentDay,
                                 ),
                               ),
                               const SizedBox(
