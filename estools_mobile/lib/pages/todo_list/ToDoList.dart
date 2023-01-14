@@ -38,7 +38,7 @@ class _TdlPageState extends State<TdlPage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: myRed,
-        child: Icon(
+        child: const Icon(
           Icons.add_rounded,
           size: 40,
         ),
@@ -76,7 +76,6 @@ class _TasksScreenState extends State<TasksScreen> {
         elevation: 0,
         context: ctx,
         builder: (ctx) => FractionallySizedBox(
-          heightFactor: 0.35,
           child: Container(
             color: myWhite,
             child: const Categories(),
@@ -168,59 +167,61 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: ShapeDecoration(
-        color: myDark,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.zero,
-            topLeft: Radius.circular(40),
-            bottomRight: Radius.zero,
-            topRight: Radius.circular(40),
+    return SingleChildScrollView(
+      child: Container(
+        decoration: ShapeDecoration(
+          color: myDark,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.zero,
+              topLeft: Radius.circular(40),
+              bottomRight: Radius.zero,
+              topRight: Radius.circular(40),
+            ),
           ),
         ),
-      ),
-      child: Padding(
-        padding:
-            const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //crossAxisAlignment: CrossAxisAlignment.,
-              children: [
-                Text(
-                  'Categories',
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: myWhite,
-                    fontWeight: FontWeight.w900,
+        child: Padding(
+          padding:
+              const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //crossAxisAlignment: CrossAxisAlignment.,
+                children: [
+                  Text(
+                    'Categories',
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: myWhite,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
-                ),
-                Icon(
-                  Icons.more_vert,
-                  color: myWhite,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                TdlCategCard(
-                    categName: 'Home Work',
-                    numberOfTasks: 15,
-                    icon: Icons.home,
-                    bgColor: Colors.red,
-                    progress: 15)
-              ],
-            ),
-          ],
+                  Icon(
+                    Icons.more_vert,
+                    color: myWhite,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: const [
+                  TdlCategCard(
+                      categName: 'Home Work',
+                      numberOfTasks: 15,
+                      icon: Icons.home,
+                      bgColor: Colors.red,
+                      progress: 15)
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
