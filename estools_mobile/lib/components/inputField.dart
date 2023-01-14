@@ -152,3 +152,46 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
     );
   }
 }
+
+class SearchInput extends StatelessWidget {
+  final String labelText;
+  final TextEditingController controller;
+
+  final Function onClick;
+  SearchInput({
+    super.key,
+    required this.controller,
+    required this.onClick,
+    required this.labelText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        filled: true,
+        alignLabelWithHint: true,
+        fillColor: myGrey,
+        focusedBorder: myOutlinedBorder(color: myDark),
+        enabledBorder: myOutlinedBorder(color: Colors.transparent),
+        errorBorder: myOutlinedBorder(color: myRed),
+        focusedErrorBorder: myOutlinedBorder(color: myRed),
+        labelText: labelText,
+        labelStyle: TextStyle(
+          fontWeight: FontWeight.w500,
+          color: myDark.withOpacity(0.7),
+        ),
+        prefixIcon: IconButton(
+          onPressed: () {
+            onClick();
+          },
+          icon: Icon(
+            Icons.search,
+            color: myDark,
+          ),
+        ),
+      ),
+    );
+  }
+}

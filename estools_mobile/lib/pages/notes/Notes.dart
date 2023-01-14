@@ -1,20 +1,20 @@
 import 'package:estools_mobile/components/Drawer.dart';
-import 'package:estools_mobile/components/filter_button.dart';
-import 'package:estools_mobile/pages/todo_list/categ_tdl_card.dart';
-import 'package:estools_mobile/pages/todo_list/task_card.dart';
+
+import 'package:estools_mobile/components/inputField.dart';
+import 'package:estools_mobile/pages/notes/categ_notes_card.dart';
+import 'package:estools_mobile/pages/notes/note_card.dart';
 import 'package:estools_mobile/constants.dart';
 
 import 'package:estools_mobile/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
-class TdlPage extends StatefulWidget {
-  const TdlPage({Key? key}) : super(key: key);
-
+class NotesPage extends StatefulWidget {
+  const NotesPage({Key? key}) : super(key: key);
   @override
-  State<TdlPage> createState() => _TdlPageState();
+  State<NotesPage> createState() => _NotesPageState();
 }
 
-class _TdlPageState extends State<TdlPage> {
+class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -32,34 +32,36 @@ class _TdlPageState extends State<TdlPage> {
         backgroundColor: myDark,
         centerTitle: true,
         title: Text(
-          'Todo List',
+          'Notes',
           style: EstlTStyle.appBarTitle,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: myRed,
-        child: const Icon(
+        child: Icon(
           Icons.add_rounded,
           size: 40,
         ),
         onPressed: () {},
       ),
       backgroundColor: myWhite,
-      body: const TasksScreen(),
+      body: const Notes(),
     );
   }
 }
 
-class TasksScreen extends StatefulWidget {
-  const TasksScreen({
+class Notes extends StatefulWidget {
+  const Notes({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<TasksScreen> createState() => _TasksScreenState();
+  State<Notes> createState() => _NotesState();
 }
 
-class _TasksScreenState extends State<TasksScreen> {
+class _NotesState extends State<Notes> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController searchCntrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     bool isModal = true;
@@ -76,6 +78,7 @@ class _TasksScreenState extends State<TasksScreen> {
         elevation: 0,
         context: ctx,
         builder: (ctx) => FractionallySizedBox(
+          // heightFactor: 0.34,
           child: Container(
             color: myWhite,
             child: const Categories(),
@@ -84,52 +87,43 @@ class _TasksScreenState extends State<TasksScreen> {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 0, left: 20, right: 20),
+    return Container(
+      margin: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          // filter buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FilterButton(
-                title: 'In progress',
-                onPressed: () {},
-              ),
-              FilterButton(
-                title: 'Completed',
-                onPressed: () {},
-                activated: false,
-              ),
-              FilterButton(
-                title: 'Archived',
-                onPressed: () {},
-                activated: false,
-              ),
-            ],
+          // Search Input
+          Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SearchInput(
+                  controller: searchCntrl,
+                  onClick: () {},
+                  labelText: 'Search',
+                ),
+              ],
+            ),
           ),
           Flexible(
             child: ListView(
               children: [
-                TaskCard(
+                NoteCard(
                   title: 'Home Work',
                   startDate: '18 Nov',
-                  endDate: '23 Nov',
-                  progress: 60,
-                  onComplete: () {},
-                  onArchive: () {},
+                  body:
+                      'Holla today am gonna do my home Works Holla today am gonna do my home WorksHolla today am gonna do my home Works',
                   onDelete: () {},
                 ),
-                TaskCard(
-                  title: 'Home Work',
+                NoteCard(
+                  title: 'Workout',
                   startDate: '18 Nov',
-                  endDate: '23 Nov',
-                  progress: 60,
-                  onComplete: () {},
-                  onArchive: () {},
+                  body:
+                      'Holla today am gonna do my home Workout Holla today am gonna do my home WorksHolla today am gonna do my home Works',
                   onDelete: () {},
                 ),
               ],
@@ -212,12 +206,12 @@ class Categories extends StatelessWidget {
               ),
               Row(
                 children: const [
-                  TdlCategCard(
-                      categName: 'Home Work',
-                      numberOfTasks: 15,
-                      icon: Icons.home,
-                      bgColor: Colors.red,
-                      progress: 15)
+                  NotesCatedCard(
+                    categName: 'Home Work',
+                    numberOfTasks: 15,
+                    icon: Icons.home,
+                    bgColor: Colors.red,
+                  )
                 ],
               ),
             ],

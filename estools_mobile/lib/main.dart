@@ -7,7 +7,7 @@ import 'package:estools_mobile/pages/home.dart';
 import 'package:estools_mobile/pages/splash_screen.dart';
 import 'package:estools_mobile/pages/splash_screen.dart';
 import 'package:estools_mobile/pages/todo_list/ToDoList.dart';
-import 'package:estools_mobile/pages/Notes.dart';
+import 'package:estools_mobile/pages/notes/Notes.dart';
 import 'package:estools_mobile/pages/timer/Timer_Estools.dart';
 
 import 'package:flutter/material.dart';
