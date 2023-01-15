@@ -9,12 +9,25 @@ import 'package:estools_mobile/pages/splash_screen.dart';
 import 'package:estools_mobile/pages/todo_list/ToDoList.dart';
 import 'package:estools_mobile/pages/notes/Notes.dart';
 import 'package:estools_mobile/pages/timer/Timer_Estools.dart';
+import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:estools_mobile/models/index.dart';
 import 'constants.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => UserModel()),
+      ChangeNotifierProxyProvider<UserModel, ConfigurationModel>(
+        update: (context, user, previousConfiguration) =>
+            ConfigurationModel(user: user),
+        create: (BuildContext context) => ConfigurationModel(user: null),
+      )
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

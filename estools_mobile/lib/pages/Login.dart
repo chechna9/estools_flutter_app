@@ -3,6 +3,8 @@ import 'package:estools_mobile/constants.dart';
 import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:estools_mobile/models/index.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -37,6 +39,35 @@ class LoginForm extends StatelessWidget {
   const LoginForm({
     Key? key,
   }) : super(key: key);
+
+  void _signin(String email, String password, BuildContext context) async {
+    UserModel _userModel = Provider.of<UserModel>(context, listen: false);
+    try {
+      if (await (_userModel.signin(email, password)
+              as Future<RequestSubmissionResponse>)
+          .then((value) => value.isValid)) {
+        print("I'm pushing");
+        Navigator.of(context).pushNamed(homeRoute);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void handleSubmitted(BuildContext context) async {
+    final FormState? form = _formKey.currentState;
+    if (_formKey.currentState!.validate()) {
+      form!.save();
+      print("emailCntrl.text " +
+          emailCntrl.text +
+          ", passwordCntrl.text " +
+          passwordCntrl.text);
+
+      _signin(emailCntrl.text, passwordCntrl.text, context);
+
+      // Navigator.of(context).pushNamed(homeRoute);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,12 +123,17 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
               Row(
-                children: const [
+                children: [
                   Flexible(child: SIGoogle_Button()),
                   SizedBox(
                     width: 10,
                   ),
-                  Flexible(child: Login_Button()),
+                  // Flexible(child: Login_Button()),
+                  Flexible(
+                    child: Login_Button(
+                      onPressed: () => handleSubmitted(context),
+                    ),
+                  )
                 ],
               ),
             ],
@@ -111,7 +147,10 @@ class LoginForm extends StatelessWidget {
 class Login_Button extends StatelessWidget {
   const Login_Button({
     Key? key,
+    required this.onPressed,
   }) : super(key: key);
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -141,11 +180,7 @@ class Login_Button extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          Navigator.of(context).pushNamed(homeRoute);
-        }
-      },
+      onPressed: onPressed,
     );
   }
 }
