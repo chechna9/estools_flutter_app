@@ -1,11 +1,33 @@
 import 'package:estools_mobile/pages/Login.dart';
-import 'package:estools_mobile/pages/Sign_in.dart';
+import 'package:estools_mobile/pages/Sign_up.dart';
+import 'package:estools_mobile/pages/agenda/agenda_page.dart';
+import 'package:estools_mobile/pages/camera_page.dart';
+import 'package:estools_mobile/pages/gallerie_page.dart';
+import 'package:estools_mobile/pages/home.dart';
 import 'package:estools_mobile/pages/splash_screen.dart';
+import 'package:estools_mobile/pages/splash_screen.dart';
+import 'package:estools_mobile/pages/ToDoList.dart';
+import 'package:estools_mobile/pages/Notes.dart';
+import 'package:estools_mobile/pages/timer/Timer_Estools.dart';
+import 'package:provider/provider.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:estools_mobile/models/index.dart';
 import 'constants.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => UserModel()),
+      ChangeNotifierProxyProvider<UserModel, ConfigurationModel>(
+        update: (context, user, previousConfiguration) =>
+            ConfigurationModel(user: user),
+        create: (BuildContext context) => ConfigurationModel(user: null),
+      )
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -33,8 +55,15 @@ class MyApp extends StatelessWidget {
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
         splashRoute: (context) => const SplashScreen(),
-        registerRoute: (context) => const Signin(),
+        registerRoute: (context) => const SignUp(),
         loginRoute: (context) => const LoginPage(),
+        agendaRoute: (context) => const AgendaPage(),
+        homeRoute: ((context) => const HomePage()),
+        todolistRoute: (context) => const TdlPage(),
+        notesRoute: (context) => const NotesPage(),
+        timerRoute: (context) => const EsTimer(),
+        cameraRoute: (context) => const CameraPage(),
+        gallerieRoute: (context) => const GalleriePage(),
       },
     );
   }

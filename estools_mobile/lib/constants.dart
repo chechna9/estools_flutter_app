@@ -8,8 +8,30 @@ Color myWhite = const Color(0xffeaeaea);
 const String splashRoute = '/splashScreen';
 const String registerRoute = '/register';
 const String loginRoute = '/login';
+const String agendaRoute = '/agenda';
+const String homeRoute = '/home';
+const String todolistRoute = '/ToDoList';
+const String notesRoute = '/Notes';
+const String timerRoute = '/EsTimer';
+const String cameraRoute = '/camera';
+const String gallerieRoute = '/gallerie';
 // box shadow
-const myBoxShadow = BoxDecoration(boxShadow: [
+const BoxShadow myBoxShadow = BoxShadow(
+  color: Colors.black38,
+  offset: Offset(
+    0.0,
+    10.0,
+  ),
+  blurRadius: 8.0,
+  spreadRadius: -6.0,
+);
+const BoxShadow catgFooterBoxShadow = BoxShadow(
+  color: Colors.black38,
+  offset: Offset(0, -2),
+  spreadRadius: 5,
+  blurRadius: 10,
+);
+const buttonBoxShadow = [
   BoxShadow(
     color: Colors.black38,
     offset: Offset(
@@ -19,4 +41,14 @@ const myBoxShadow = BoxDecoration(boxShadow: [
     blurRadius: 8.0,
     spreadRadius: -6.0,
   ),
-]);
+];
+// button style form
+ButtonStyle btnSyle = TextButton.styleFrom(
+  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+  backgroundColor: myRed,
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(10),
+    ),
+  ),
+);
