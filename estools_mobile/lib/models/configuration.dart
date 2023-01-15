@@ -1,3 +1,4 @@
+import 'package:estools_mobile/models/note_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import '../service/consts.dart';
@@ -81,7 +82,7 @@ class ConfigurationModel with ChangeNotifier {
             headers: {'x-access-token': _token},
             body: _toJson(),
           )
-          .timeout(Duration(seconds: 10));
+          .timeout(const Duration(seconds: 10));
 
       final data = convert.jsonDecode(response.body);
       returnValue.message = data['message'];
@@ -126,40 +127,5 @@ class ConfigurationModel with ChangeNotifier {
       print(e);
     }
     return returnValue;
-  }
-}
-
-//notes class
-class Note {
-  String id;
-  String title;
-  String description;
-  String add_date;
-  String category;
-  Note(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.add_date,
-      required this.category});
-
-  Map<String, String> toJson() {
-    Map<String, String> data = Map<String, String>();
-    data['_id'] = id;
-    data['title'] = title;
-    data['description'] = description;
-    data['add_date'] = add_date;
-    data['category'] = category;
-    return data;
-  }
-
-  factory Note.fromJson(Map<String, dynamic> data) {
-    return Note(
-      id: data['_id'],
-      title: data['title'],
-      description: data['description'],
-      add_date: data['add_date'],
-      category: data['category'],
-    );
   }
 }

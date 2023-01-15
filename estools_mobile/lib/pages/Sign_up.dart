@@ -1,4 +1,5 @@
 import 'package:estools_mobile/components/inputField.dart';
+import 'package:estools_mobile/service/auth.dart';
 import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:estools_mobile/constants.dart';
@@ -23,8 +24,11 @@ class SignUp extends StatelessWidget {
               SvgPicture.asset(
                 EstlAssets.logoBlueRed,
               ),
-              Flexible(
-                  child: SingleChildScrollView(child: const RegisterForm())),
+              const Flexible(
+                child: SingleChildScrollView(
+                  child: RegisterForm(),
+                ),
+              ),
             ],
           ),
         ),
@@ -43,37 +47,6 @@ class RegisterForm extends StatelessWidget {
   const RegisterForm({
     Key? key,
   }) : super(key: key);
-
-  void _signup(String email, String password, String firstname, String lastname,
-      BuildContext context) async {
-    UserModel _userModel = Provider.of<UserModel>(context, listen: false);
-    try {
-      if (await (_userModel.signup(email, password, firstname, lastname)
-              as Future<RequestSubmissionResponse>)
-          .then((value) => value.isValid)) {
-        print("I'm pushing");
-        Navigator.of(context).pushNamed(loginRoute);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void handleSubmitted(BuildContext context) async {
-    final FormState? form = _formKey.currentState;
-    if (_formKey.currentState!.validate()) {
-      form!.save();
-      print("emailCntrl.text " +
-          emailCntrl.text +
-          ", passwordCntrl.text " +
-          passwordCntrl.text);
-
-      _signup(emailCntrl.text, passwordCntrl.text, fnameCntrl.text,
-          lnameCntrl.text, context);
-
-      // Navigator.of(context).pushNamed(homeRoute);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +109,8 @@ class RegisterForm extends StatelessWidget {
                   ),
                   Flexible(
                     child: SignUp_Button(
-                      onPressed: () => handleSubmitted(context),
+                      onPressed: () => Auth.handleSignUp(context, _formKey,
+                          emailCntrl, passwordCntrl, fnameCntrl, lnameCntrl),
                     ),
                   ),
                 ],
