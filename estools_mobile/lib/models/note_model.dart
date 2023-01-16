@@ -5,12 +5,13 @@ class Note {
   String description;
   String add_date;
   String category;
-  Note(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.add_date,
-      required this.category});
+  Note({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.add_date,
+    required this.category,
+  });
 
   Map<String, String> toJson() {
     Map<String, String> data = Map<String, String>();

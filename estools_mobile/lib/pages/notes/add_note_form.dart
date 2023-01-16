@@ -1,5 +1,6 @@
 import 'package:estools_mobile/components/inputField.dart';
 import 'package:estools_mobile/constants.dart';
+import 'package:estools_mobile/models/note_model.dart';
 import 'package:estools_mobile/utils/colors.dart';
 import 'package:estools_mobile/utils/text_style.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
     return Scaffold(
       backgroundColor: myGrey.withOpacity(0.9),
       body: Container(
+        alignment: Alignment.center,
         padding: const EdgeInsets.all(20),
         child: Form(
           child: SingleChildScrollView(
@@ -33,6 +35,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     boxShadow: [myBoxShadow],
                   ),
                   child: TextFormField(
+                    controller: titleCntrl,
                     decoration: InputDecoration(
                       border: CustomBurders.myOutlinedBorder(
                         color: myDark,
@@ -207,6 +210,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     boxShadow: [myBoxShadow],
                   ),
                   child: TextFormField(
+                    controller: descriptionCntrl,
                     minLines: 5,
                     maxLines: null,
                     decoration: InputDecoration(
@@ -258,7 +262,14 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          categVal = categVal ?? 'All';
+                          String now =
+                              new DateTime.now().toString().split(' ')[0];
+
+                          print('title ' + titleCntrl.text);
+                          print('body ' + descriptionCntrl.text);
+                          print('date ' + now);
+                          print('categ ' + categVal!);
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
