@@ -19,180 +19,196 @@ class _AddNoteFormState extends State<AddNoteForm> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(20),
-          child: Form(
-            child: Column(
-              children: [
-                // title
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [myBoxShadow],
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: CustomBurders.myOutlinedBorder(color: myDark),
-                      focusedBorder:
-                          CustomBurders.myOutlinedBorder(color: myDark),
-                      fillColor: myGrey,
-                      filled: true,
-                      hintText: 'Title',
-                    ),
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Form(
+          child: Column(
+            children: [
+              // title
+              Container(
+                decoration: const BoxDecoration(
+                  boxShadow: [myBoxShadow],
+                ),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: CustomBurders.myOutlinedBorder(color: myDark),
+                    focusedBorder:
+                        CustomBurders.myOutlinedBorder(color: myDark),
+                    fillColor: myGrey,
+                    filled: true,
+                    hintText: 'Title',
                   ),
                 ),
-                // categorie and icon and color
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    DropdownButton(
-                      elevation: 12,
-                      hint: Text('Categorie'),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: myDark,
-                      ),
-                      style: TextStyle(
-                        color: myDark,
-                        fontSize: 20,
-                      ),
-                      underline: Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                            color: myDark,
-                          )),
-                        ),
-                      ),
-                      value: categVal,
-                      onChanged: (v) {
-                        setState(() {
-                          categVal = v;
-                        });
-                      },
-                      items: [
-                        DropdownMenuItem(
-                          value: 'All',
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('All'),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              Icon(
-                                Icons.all_inclusive_sharp,
-                                color: myDark,
-                              ),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Home',
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Home Work'),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              Icon(
-                                Icons.home_rounded,
-                                color: myDark,
-                              ),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Sport',
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Sport'),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              Icon(
-                                Icons.sports_baseball_rounded,
-                                color: myDark,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+              ),
+              // categorie and icon and color
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  DropdownButton(
+                    elevation: 12,
+                    hint: Text('Categorie'),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: myDark,
                     ),
-                    DropdownButton(
-                      elevation: 12,
-                      hint: Text('Color'),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: myDark,
-                      ),
-                      style: TextStyle(
-                        color: myDark,
-                        fontSize: 20,
-                      ),
-                      underline: Container(
-                        decoration: BoxDecoration(
-                          border: Border(
+                    style: TextStyle(
+                      color: myDark,
+                      fontSize: 20,
+                    ),
+                    underline: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
                             bottom: BorderSide(
+                          color: myDark,
+                        )),
+                      ),
+                    ),
+                    value: categVal,
+                    onChanged: (v) {
+                      setState(() {
+                        categVal = v;
+                      });
+                    },
+                    items: [
+                      DropdownMenuItem(
+                        value: 'All',
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('All'),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            Icon(
+                              Icons.all_inclusive_sharp,
                               color: myDark,
                             ),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Home',
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Home Work'),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            Icon(
+                              Icons.home_rounded,
+                              color: myDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Sport',
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Sport'),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            Icon(
+                              Icons.sports_baseball_rounded,
+                              color: myDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  DropdownButton(
+                    elevation: 12,
+                    hint: Text('Color'),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: myDark,
+                    ),
+                    style: TextStyle(
+                      color: myDark,
+                      fontSize: 20,
+                    ),
+                    underline: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: myDark,
                           ),
                         ),
                       ),
-                      value: colorVal,
-                      onChanged: (v) {
-                        setState(() {
-                          colorVal = v;
-                        });
-                      },
-                      items: [
-                        DropdownMenuItem(
-                          value: 'Red',
-                          child: Row(
-                            children: [
-                              const Text('Red'),
-                              const SizedBox(width: 12),
-                              Icon(
-                                Icons.circle,
-                                color: myRed,
-                              ),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Blue',
-                          child: Row(
-                            children: [
-                              const Text('Blue'),
-                              const SizedBox(width: 12),
-                              Icon(
-                                Icons.circle,
-                                color: myDark,
-                              ),
-                            ],
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Green',
-                          child: Row(
-                            children: [
-                              const Text('Green'),
-                              const SizedBox(width: 12),
-                              Icon(
-                                Icons.circle,
-                                color: EstlColors.greenDone,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
                     ),
-                  ],
+                    value: colorVal,
+                    onChanged: (v) {
+                      setState(() {
+                        colorVal = v;
+                      });
+                    },
+                    items: [
+                      DropdownMenuItem(
+                        value: 'Red',
+                        child: Row(
+                          children: [
+                            const Text('Red'),
+                            const SizedBox(width: 12),
+                            Icon(
+                              Icons.circle,
+                              color: myRed,
+                            ),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Blue',
+                        child: Row(
+                          children: [
+                            const Text('Blue'),
+                            const SizedBox(width: 12),
+                            Icon(
+                              Icons.circle,
+                              color: myDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Green',
+                        child: Row(
+                          children: [
+                            const Text('Green'),
+                            const SizedBox(width: 12),
+                            Icon(
+                              Icons.circle,
+                              color: EstlColors.greenDone,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // Text Area
+              Container(
+                decoration: const BoxDecoration(
+                  boxShadow: [myBoxShadow],
                 ),
-              ],
-            ),
+                child: TextFormField(
+                  minLines: 5,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    border: CustomBurders.myOutlinedBorder(color: myDark),
+                    focusedBorder:
+                        CustomBurders.myOutlinedBorder(color: myDark),
+                    fillColor: myGrey,
+                    filled: true,
+                    hintText: 'my note',
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
