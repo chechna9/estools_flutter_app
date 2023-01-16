@@ -17,17 +17,19 @@ import 'package:estools_mobile/models/index.dart';
 import 'constants.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => UserModel()),
-      ChangeNotifierProxyProvider<UserModel, ConfigurationModel>(
-        update: (context, user, previousConfiguration) =>
-            ConfigurationModel(user: user),
-        create: (BuildContext context) => ConfigurationModel(user: null),
-      )
-    ],
-    child: MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserModel()),
+        ChangeNotifierProxyProvider<UserModel, ConfigurationModel>(
+          update: (context, user, previousConfiguration) =>
+              ConfigurationModel(user: user),
+          create: (BuildContext context) => ConfigurationModel(user: null),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // second if you want that that the app start with it you have to set the initial route to the name of the rout
-      initialRoute: splashRoute,
+      initialRoute: notesRoute,
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
         splashRoute: (context) => const SplashScreen(),

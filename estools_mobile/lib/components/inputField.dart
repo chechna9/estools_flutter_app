@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 // borders
-OutlineInputBorder myOutlinedBorder({Color? color}) => OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20),
-      borderSide: BorderSide(
-        color: color ?? Colors.black,
-        width: 2,
-      ),
-    );
+class CustomBurders {
+  static OutlineInputBorder myOutlinedBorder({Color? color}) =>
+      OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide(
+          color: color ?? Colors.black,
+          width: 2,
+        ),
+      );
+}
 
 class CustomInputField extends StatefulWidget {
   final String labelText;
@@ -61,10 +64,11 @@ class _CustomInputFieldState extends State<CustomInputField> {
           filled: true,
           alignLabelWithHint: true,
           fillColor: myGrey,
-          focusedBorder: myOutlinedBorder(color: myDark),
-          enabledBorder: myOutlinedBorder(color: Colors.transparent),
-          errorBorder: myOutlinedBorder(color: myRed),
-          focusedErrorBorder: myOutlinedBorder(color: myRed),
+          focusedBorder: CustomBurders.myOutlinedBorder(color: myDark),
+          enabledBorder:
+              CustomBurders.myOutlinedBorder(color: Colors.transparent),
+          errorBorder: CustomBurders.myOutlinedBorder(color: myRed),
+          focusedErrorBorder: CustomBurders.myOutlinedBorder(color: myRed),
           labelText: widget.labelText,
           labelStyle: TextStyle(
             fontWeight: FontWeight.w500,
@@ -125,10 +129,11 @@ class _CustomPasswordInputState extends State<CustomPasswordInput> {
           filled: true,
           alignLabelWithHint: true,
           fillColor: myGrey,
-          focusedBorder: myOutlinedBorder(color: myDark),
-          enabledBorder: myOutlinedBorder(color: Colors.transparent),
-          errorBorder: myOutlinedBorder(color: myRed),
-          focusedErrorBorder: myOutlinedBorder(color: myRed),
+          focusedBorder: CustomBurders.myOutlinedBorder(color: myDark),
+          enabledBorder:
+              CustomBurders.myOutlinedBorder(color: Colors.transparent),
+          errorBorder: CustomBurders.myOutlinedBorder(color: myRed),
+          focusedErrorBorder: CustomBurders.myOutlinedBorder(color: myRed),
           labelText: widget.labelText,
           labelStyle: TextStyle(
             fontWeight: FontWeight.w500,
@@ -173,10 +178,11 @@ class SearchInput extends StatelessWidget {
         filled: true,
         alignLabelWithHint: true,
         fillColor: myGrey,
-        focusedBorder: myOutlinedBorder(color: myDark),
-        enabledBorder: myOutlinedBorder(color: Colors.transparent),
-        errorBorder: myOutlinedBorder(color: myRed),
-        focusedErrorBorder: myOutlinedBorder(color: myRed),
+        focusedBorder: CustomBurders.myOutlinedBorder(color: myDark),
+        enabledBorder:
+            CustomBurders.myOutlinedBorder(color: Colors.transparent),
+        errorBorder: CustomBurders.myOutlinedBorder(color: myRed),
+        focusedErrorBorder: CustomBurders.myOutlinedBorder(color: myRed),
         labelText: labelText,
         labelStyle: TextStyle(
           fontWeight: FontWeight.w500,
