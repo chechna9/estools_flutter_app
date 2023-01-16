@@ -46,7 +46,7 @@ class _NotesPageState extends State<NotesPage> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => AddNoteForm(),
+            builder: (context) => const AddNoteForm(),
           );
         },
       ),
