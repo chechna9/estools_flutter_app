@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-final _formKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 final TextEditingController emailCntrl = TextEditingController();
 final TextEditingController passwordCntrl = TextEditingController();
 
@@ -43,6 +43,11 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      emailCntrl.text =
+          (ModalRoute.of(context)!.settings.arguments as Map)['email'];
+    }
+
     return Column(
       children: [
         Text(
@@ -96,15 +101,32 @@ class LoginForm extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Flexible(child: SIGoogle_Button()),
-                  SizedBox(
+                  const Expanded(child: SIGoogle_Button()),
+                  const SizedBox(
                     width: 10,
                   ),
                   // Flexible(child: Login_Button()),
-                  Flexible(
+                  Expanded(
                     child: Login_Button(
-                      onPressed: () => Auth.handleLogin(
-                          context, _formKey, emailCntrl, passwordCntrl),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          late RequestSubmissionResponse response;
+                          response = await Auth.signin(
+                              emailCntrl.text, passwordCntrl.text, context);
+
+                          if (response.isValid) {
+                            Navigator.of(context)
+                                .pushReplacementNamed(homeRoute);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(response.message),
+                                backgroundColor: myRed,
+                              ),
+                            );
+                          }
+                        }
+                      },
                     ),
                   )
                 ],
@@ -140,20 +162,15 @@ class Login_Button extends StatelessWidget {
           ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Login',
-            style: TextStyle(
-              fontSize: 25,
-              color: myWhite,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
       onPressed: onPressed,
+      child: Text(
+        'Login',
+        style: TextStyle(
+          fontSize: 25,
+          color: myWhite,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
@@ -179,7 +196,7 @@ class SIGoogle_Button extends StatelessWidget {
         children: [
           Image.asset(
             EstlAssets.googleLogo,
-            width: 32,
+            width: 35,
           ),
           const SizedBox(
             width: 5,

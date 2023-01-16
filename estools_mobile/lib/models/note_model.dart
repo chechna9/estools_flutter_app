@@ -6,7 +6,7 @@ class Note {
   String add_date;
   String category;
   Note({
-    required this.id,
+    this.id = '',
     required this.title,
     required this.description,
     required this.add_date,

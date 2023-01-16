@@ -108,10 +108,31 @@ class RegisterForm extends StatelessWidget {
                     width: 10,
                   ),
                   Flexible(
-                    child: SignUp_Button(
-                      onPressed: () => Auth.handleSignUp(context, _formKey,
-                          emailCntrl, passwordCntrl, fnameCntrl, lnameCntrl),
-                    ),
+                    child: SignUp_Button(onPressed: () async {
+                      Navigator.of(context).pushReplacementNamed(loginRoute,
+                          arguments: {'email': emailCntrl.text});
+                      if (_formKey.currentState!.validate()) {
+                        late RequestSubmissionResponse response;
+
+                        response = await Auth.signup(
+                            emailCntrl.text,
+                            passwordCntrl.text,
+                            fnameCntrl.text,
+                            lnameCntrl.text,
+                            context);
+                        if (response.isValid) {
+                          Navigator.of(context).pushReplacementNamed(loginRoute,
+                              arguments: {'email': emailCntrl.text});
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(response.message),
+                              backgroundColor: myRed,
+                            ),
+                          );
+                        }
+                      }
+                    }),
                   ),
                 ],
               ),

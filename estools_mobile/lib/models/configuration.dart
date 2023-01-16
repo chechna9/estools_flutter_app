@@ -74,7 +74,7 @@ class ConfigurationModel with ChangeNotifier {
     RequestSubmissionResponse returnValue =
         RequestSubmissionResponse(isValid: false, message: "Invalid");
     try {
-      var url = Uri.parse('${apiBaseUrl}user/config');
+      var url = Uri.parse('${apiBaseUrl}user/config/params');
       print(url);
       final response = await http
           .put(
