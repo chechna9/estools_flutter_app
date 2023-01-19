@@ -55,7 +55,7 @@ class UserModel with ChangeNotifier {
     _firstname = json['firstname'];
     _lastname = json['lastname'];
     _email = json['email'];
-    _configuration = json['configs'];
+    _configuration = json['configs'][0];
     notifyListeners();
   }
 
@@ -136,7 +136,7 @@ class UserModel with ChangeNotifier {
         case 200:
           print(200);
           //updating the user data
-          _fromJson(data);
+          _fromJson(data['user']);
           //geting token
           _token = data['accessToken'];
           print('Response Validated with token: ' + _token!);

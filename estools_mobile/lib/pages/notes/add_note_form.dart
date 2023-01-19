@@ -1,9 +1,11 @@
 import 'package:estools_mobile/components/inputField.dart';
 import 'package:estools_mobile/constants.dart';
+import 'package:estools_mobile/models/configuration.dart';
 import 'package:estools_mobile/models/note_model.dart';
 import 'package:estools_mobile/utils/colors.dart';
 import 'package:estools_mobile/utils/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({super.key});
@@ -263,13 +265,36 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       child: ElevatedButton(
                         onPressed: () {
                           categVal = categVal ?? 'All';
-                          String now =
+                          final String now =
                               new DateTime.now().toString().split(' ')[0];
-
+                          final List<String> splitedNow = now.split('-');
+                          final String date =
+                              '${splitedNow[2]}/${splitedNow[1]}/${splitedNow[0]}';
                           print('title ' + titleCntrl.text);
                           print('body ' + descriptionCntrl.text);
-                          print('date ' + now);
+                          print('date ' + date);
                           print('categ ' + categVal!);
+                          final Note newNote = Note(
+                            title: titleCntrl.text,
+                            description: descriptionCntrl.text,
+                            add_date: date,
+                            category: categVal!,
+                          );
+
+                          ConfigurationModel _config =
+                              Provider.of<ConfigurationModel>(context,
+                                  listen: false);
+                          _config.setNote(newNote);
+
+                          // try {
+                          //   ConfigurationModel _config =
+                          //       Provider.of<ConfigurationModel>(context,
+                          //           listen: false);
+                          //   _config.setNote(newNote);
+                          // } catch (e) {
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //       SnackBar(content: Text(e.toString())));
+                          // }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
