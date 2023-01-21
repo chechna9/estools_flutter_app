@@ -64,13 +64,14 @@ class _EsTimerState extends State<EsTimer> {
   Future<String?> openDialogue() => showDialog<String>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text("Set Timer"),
+          title: const Text("Set Timer"),
           content: Form(
             key: _formKey,
             child: TextFormField(
               keyboardType: TextInputType.number,
               autofocus: true,
-              decoration: InputDecoration(hintText: "Number between 0-59"),
+              decoration:
+                  const InputDecoration(hintText: "Number between 0-59"),
               controller: controller,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -138,118 +139,120 @@ class _EsTimerState extends State<EsTimer> {
           ),
         ),
         backgroundColor: myWhite,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 190.0,
-                  height: 190.0,
-                  child: Center(
-                    child: Text(
-                      "${f.format(_minutes)} : ${f.format(_seconds)}",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 48,
-                      ),
-                    ),
-                  ),
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: myGrey),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.06,
-            ),
-            SizedBox(
-              width: 190,
-              height: 70,
-              child: ElevatedButton(
-                onPressed: () async {
-                  final name = await openDialogue();
-                  if (name == null || name.isEmpty) return;
-
-                  setState(() => this.name = name);
-                },
-                child: Text(
-                  'Set Timer',
-                  style: TextStyle(
-                    color: myWhite,
-                    fontSize: 20,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: myDark,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.16,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _stopTimer();
-                      });
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.all(36.0),
+                  Container(
+                    width: 190.0,
+                    height: 190.0,
+                    child: Center(
                       child: Text(
-                        'Stop',
+                        "${f.format(_minutes)} : ${f.format(_seconds)}",
                         style: TextStyle(
-                          color: myWhite,
-                          fontSize: 20,
+                          color: Colors.black,
+                          fontSize: 48,
                         ),
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.grey,
-                      shape: CircleBorder(
-                        side: BorderSide(
-                          color: myGrey,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _startTimer();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(36.0),
-                      child: Text(
-                        'Start',
-                        style: TextStyle(
-                          color: myWhite,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: myRed,
-                      shape: const CircleBorder(
-                        side: BorderSide(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
+                    decoration:
+                        BoxDecoration(shape: BoxShape.circle, color: myGrey),
                   ),
                 ],
               ),
-            )
-          ],
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.06,
+              ),
+              SizedBox(
+                width: 190,
+                height: 70,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final name = await openDialogue();
+                    if (name == null || name.isEmpty) return;
+
+                    setState(() => this.name = name);
+                  },
+                  child: Text(
+                    'Set Timer',
+                    style: TextStyle(
+                      color: myWhite,
+                      fontSize: 20,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: myDark,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.16,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _stopTimer();
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(36.0),
+                        child: Text(
+                          'Stop',
+                          style: TextStyle(
+                            color: myWhite,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey,
+                        shape: CircleBorder(
+                          side: BorderSide(
+                            color: myGrey,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _startTimer();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(36.0),
+                        child: Text(
+                          'Start',
+                          style: TextStyle(
+                            color: myWhite,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: myRed,
+                        shape: const CircleBorder(
+                          side: BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
@@ -290,6 +293,5 @@ class _EsTimerState extends State<EsTimer> {
         ),
       ),
     );
-    ;
   }
 }
