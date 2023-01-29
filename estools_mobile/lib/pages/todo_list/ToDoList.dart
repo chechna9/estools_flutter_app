@@ -1,5 +1,6 @@
 import 'package:estools_mobile/components/Drawer.dart';
 import 'package:estools_mobile/components/filter_button.dart';
+import 'package:estools_mobile/pages/todo_list/add_todo_form.dart';
 import 'package:estools_mobile/pages/todo_list/categ_tdl_card.dart';
 import 'package:estools_mobile/pages/todo_list/task_card.dart';
 import 'package:estools_mobile/constants.dart';
@@ -42,7 +43,12 @@ class _TdlPageState extends State<TdlPage> {
           Icons.add_rounded,
           size: 40,
         ),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => const AddTodoForm(),
+          );
+        },
       ),
       backgroundColor: myWhite,
       body: const TasksScreen(),
