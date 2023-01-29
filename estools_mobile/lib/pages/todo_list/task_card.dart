@@ -28,15 +28,14 @@ class TaskCard extends StatelessWidget {
     return Slidable(
       key: const ValueKey(0),
       endActionPane: ActionPane(
+        extentRatio: 0.4,
         motion: const BehindMotion(),
         children: [
           // Done
           SlidableAction(
             autoClose: true,
-            flex: 1,
             onPressed: (context) => onComplete(),
-
-            backgroundColor: myDark,
+            backgroundColor: myWhite,
             foregroundColor: EstlColors.greenDone,
             icon: Icons.check_circle,
             // label: 'complete',
@@ -44,9 +43,8 @@ class TaskCard extends StatelessWidget {
           // Archive
           SlidableAction(
             autoClose: true,
-            flex: 1,
             onPressed: (context) => onArchive(),
-            backgroundColor: myDark,
+            backgroundColor: myWhite,
             foregroundColor: myRed,
             icon: Icons.archive,
             //label: 'Archive',
@@ -54,9 +52,8 @@ class TaskCard extends StatelessWidget {
           // Delete
           SlidableAction(
             autoClose: true,
-            flex: 1,
             onPressed: (context) => onDelete(),
-            backgroundColor: myDark,
+            backgroundColor: myWhite,
             foregroundColor: Colors.red,
             icon: Icons.delete,
             //label: 'Delete',
@@ -64,7 +61,7 @@ class TaskCard extends StatelessWidget {
         ],
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 15),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: myGrey,

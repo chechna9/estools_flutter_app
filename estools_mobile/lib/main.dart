@@ -9,12 +9,27 @@ import 'package:estools_mobile/pages/splash_screen.dart';
 import 'package:estools_mobile/pages/todo_list/ToDoList.dart';
 import 'package:estools_mobile/pages/notes/Notes.dart';
 import 'package:estools_mobile/pages/timer/Timer_Estools.dart';
+import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:estools_mobile/models/index.dart';
 import 'constants.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserModel()),
+        ChangeNotifierProxyProvider<UserModel, ConfigurationModel>(
+          update: (context, user, previousConfiguration) =>
+              ConfigurationModel(user: user),
+          create: (BuildContext context) => ConfigurationModel(user: null),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -38,7 +53,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // second if you want that that the app start with it you have to set the initial route to the name of the rout
-      initialRoute: todolistRoute,
+      initialRoute: registerRoute,
       // first add your page here like this format routeName : (context)=> PageName()
       routes: {
         splashRoute: (context) => const SplashScreen(),

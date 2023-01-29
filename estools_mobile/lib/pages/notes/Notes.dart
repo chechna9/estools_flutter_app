@@ -1,6 +1,7 @@
 import 'package:estools_mobile/components/Drawer.dart';
 
 import 'package:estools_mobile/components/inputField.dart';
+import 'package:estools_mobile/pages/notes/add_note_form.dart';
 import 'package:estools_mobile/pages/notes/categ_notes_card.dart';
 import 'package:estools_mobile/pages/notes/note_card.dart';
 import 'package:estools_mobile/constants.dart';
@@ -38,11 +39,16 @@ class _NotesPageState extends State<NotesPage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: myRed,
-        child: Icon(
+        child: const Icon(
           Icons.add_rounded,
           size: 40,
         ),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => const AddNoteForm(),
+          );
+        },
       ),
       backgroundColor: myWhite,
       body: const Notes(),
@@ -64,12 +70,7 @@ class _NotesState extends State<Notes> {
   final TextEditingController searchCntrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    bool isModal = true;
-
-    void _showCateg(BuildContext ctx) {
-      setState(() {
-        isModal = true;
-      });
+    void showCateg(BuildContext ctx) {
       showModalBottomSheet(
         barrierColor: Colors.transparent,
         isDismissible: true,
@@ -134,7 +135,7 @@ class _NotesState extends State<Notes> {
             margin: const EdgeInsets.symmetric(vertical: 20),
             child: TextButton(
               onPressed: () {
-                _showCateg(context);
+                showCateg(context);
               },
               style: TextButton.styleFrom(
                   backgroundColor: myDark,

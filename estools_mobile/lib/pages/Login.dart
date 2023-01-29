@@ -1,8 +1,11 @@
 import 'package:estools_mobile/components/inputField.dart';
 import 'package:estools_mobile/constants.dart';
+import 'package:estools_mobile/service/auth.dart';
 import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:estools_mobile/models/index.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,7 +32,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-final _formKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 final TextEditingController emailCntrl = TextEditingController();
 final TextEditingController passwordCntrl = TextEditingController();
 
@@ -40,6 +43,11 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      emailCntrl.text =
+          (ModalRoute.of(context)!.settings.arguments as Map)['email'];
+    }
+
     return Column(
       children: [
         Text(
@@ -92,12 +100,35 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
               Row(
-                children: const [
-                  Flexible(child: SIGoogle_Button()),
-                  SizedBox(
+                children: [
+                  const Expanded(child: SIGoogle_Button()),
+                  const SizedBox(
                     width: 10,
                   ),
-                  Flexible(child: Login_Button()),
+                  // Flexible(child: Login_Button()),
+                  Expanded(
+                    child: Login_Button(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          late RequestSubmissionResponse response;
+                          response = await Auth.signin(
+                              emailCntrl.text, passwordCntrl.text, context);
+
+                          if (response.isValid) {
+                            Navigator.of(context)
+                                .pushReplacementNamed(homeRoute);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(response.message),
+                                backgroundColor: myRed,
+                              ),
+                            );
+                          }
+                        }
+                      },
+                    ),
+                  )
                 ],
               ),
             ],
@@ -111,7 +142,10 @@ class LoginForm extends StatelessWidget {
 class Login_Button extends StatelessWidget {
   const Login_Button({
     Key? key,
+    required this.onPressed,
   }) : super(key: key);
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -128,24 +162,15 @@ class Login_Button extends StatelessWidget {
           ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Login',
-            style: TextStyle(
-              fontSize: 25,
-              color: myWhite,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+      onPressed: onPressed,
+      child: Text(
+        'Login',
+        style: TextStyle(
+          fontSize: 25,
+          color: myWhite,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          Navigator.of(context).pushNamed(homeRoute);
-        }
-      },
     );
   }
 }
@@ -171,7 +196,7 @@ class SIGoogle_Button extends StatelessWidget {
         children: [
           Image.asset(
             EstlAssets.googleLogo,
-            width: 32,
+            width: 35,
           ),
           const SizedBox(
             width: 5,
