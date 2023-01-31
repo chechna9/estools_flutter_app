@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddNoteForm extends StatefulWidget {
-  const AddNoteForm({super.key});
+  final Function addNote;
+  const AddNoteForm({super.key, required this.addNote});
 
   @override
   State<AddNoteForm> createState() => _AddNoteFormState();
