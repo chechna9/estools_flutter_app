@@ -20,7 +20,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
   final TextEditingController descriptionCntrl = TextEditingController();
   String? colorVal;
   String? categVal;
-
+  final GlobalKey<FormState> formkey = new GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,28 +29,15 @@ class _AddNoteFormState extends State<AddNoteForm> {
         alignment: Alignment.center,
         padding: const EdgeInsets.all(20),
         child: Form(
+          key: formkey,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 // title
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [myBoxShadow],
-                  ),
-                  child: TextFormField(
-                    controller: titleCntrl,
-                    decoration: InputDecoration(
-                      border: CustomBurders.myOutlinedBorder(
-                        color: myDark,
-                      ),
-                      focusedBorder:
-                          CustomBurders.myOutlinedBorder(color: myDark),
-                      fillColor: myGrey,
-                      filled: true,
-                      hintText: 'Title',
-                    ),
-                  ),
-                ),
+                CustomInputField(
+                    labelText: 'Title',
+                    validator: (e) => e!.isEmpty ? 'required field' : null,
+                    controller: titleCntrl),
                 const SizedBox(
                   height: 20,
                 ),
@@ -60,7 +47,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   children: [
                     DropdownButton(
                       elevation: 12,
-                      hint: Text('Categorie'),
+                      hint: const Text('Categorie'),
                       icon: Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: myDark,
@@ -265,37 +252,37 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          categVal = categVal ?? 'All';
-                          final String now =
-                              new DateTime.now().toString().split(' ')[0];
-                          final List<String> splitedNow = now.split('-');
-                          final String date =
-                              '${splitedNow[2]}/${splitedNow[1]}/${splitedNow[0]}';
-                          print('title ' + titleCntrl.text);
-                          print('body ' + descriptionCntrl.text);
-                          print('date ' + date);
-                          print('categ ' + categVal!);
-                          final Note newNote = Note(
-                            title: titleCntrl.text,
-                            description: descriptionCntrl.text,
-                            add_date: date,
-                            category: categVal!,
-                          );
+                          if (formkey.currentState!.validate()) {
+                            categVal = categVal ?? 'All';
+                            final String now =
+                                new DateTime.now().toString().split(' ')[0];
+                            final List<String> splitedNow = now.split('-');
+                            final String date =
+                                '${splitedNow[2]}/${splitedNow[1]}/${splitedNow[0]}';
 
-                          ConfigurationModel _config =
-                              Provider.of<ConfigurationModel>(context,
-                                  listen: false);
-                          _config.setNote(newNote);
+                            final Note newNote = Note(
+                              title: titleCntrl.text,
+                              description: descriptionCntrl.text,
+                              add_date: date,
+                              category: categVal!,
+                            );
+                            widget.addNote(newNote);
+                            Navigator.pop(context);
+                            // ConfigurationModel _config =
+                            //     Provider.of<ConfigurationModel>(context,
+                            //         listen: false);
+                            // _config.setNote(newNote);
 
-                          // try {
-                          //   ConfigurationModel _config =
-                          //       Provider.of<ConfigurationModel>(context,
-                          //           listen: false);
-                          //   _config.setNote(newNote);
-                          // } catch (e) {
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //       SnackBar(content: Text(e.toString())));
-                          // }
+                            // try {
+                            //   ConfigurationModel _config =
+                            //       Provider.of<ConfigurationModel>(context,
+                            //           listen: false);
+                            //   _config.setNote(newNote);
+                            // } catch (e) {
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //       SnackBar(content: Text(e.toString())));
+                            // }
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(

@@ -95,7 +95,7 @@ class _NotesPageState extends State<NotesPage> {
           showDialog(
             context: context,
             builder: (context) => AddNoteForm(
-              addNote: () {},
+              addNote: addNote,
             ),
           );
         },
