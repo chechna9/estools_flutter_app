@@ -221,7 +221,7 @@ class _AddTodoFormState extends State<AddTodoForm> {
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate: DateTime(2000),
-                            lastDate: DateTime.now(),
+                            lastDate: DateTime(2030),
                           ).then(
                             (value) {
                               setStartTime(value);
@@ -259,7 +259,7 @@ class _AddTodoFormState extends State<AddTodoForm> {
                             context: context,
                             initialDate: endTime ?? DateTime.now(),
                             firstDate: DateTime(2000),
-                            lastDate: DateTime.now(),
+                            lastDate: DateTime(2030),
                           ).then(
                             (value) {
                               setEndTime(value);

@@ -170,7 +170,7 @@ class _TdlPageState extends State<TdlPage> {
                       (e) => TaskCard(
                         title: e.title,
                         startDate: e.startDate,
-                        endDate: e.startDate,
+                        endDate: e.endDate,
                         progress: e.progress,
                         onComplete: () => completeTask(index),
                         onArchive: () => archiveTask(index),
