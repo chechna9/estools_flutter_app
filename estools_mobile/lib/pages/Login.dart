@@ -70,7 +70,12 @@ class LoginForm extends StatelessWidget {
               CustomInputField(
                 labelText: 'Email',
                 controller: emailCntrl,
-                validator: (e) => e!.isEmpty ? 'required field' : null,
+                validator: (e) => e!.isEmpty
+                    ? 'required field'
+                    : !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(e)
+                        ? 'this is not an email'
+                        : null,
               ),
               const SizedBox(height: 15),
               CustomPasswordInput(
@@ -110,7 +115,7 @@ class LoginForm extends StatelessWidget {
                     child: Login_Button(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          if (emailCntrl.text == 'admin' &&
+                          if (emailCntrl.text == 'admin@gmail.com' &&
                               passwordCntrl.text == 'admin') {
                             Navigator.of(context)
                                 .pushReplacementNamed(homeRoute);

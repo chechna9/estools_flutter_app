@@ -84,7 +84,12 @@ class RegisterForm extends StatelessWidget {
               CustomInputField(
                 labelText: 'Email',
                 controller: emailCntrl,
-                validator: (e) => e!.isEmpty ? 'required field' : null,
+                validator: (e) => e!.isEmpty
+                    ? 'required field'
+                    : !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(e)
+                        ? 'this is not an email'
+                        : null,
               ),
               const SizedBox(height: 15),
               CustomPasswordInput(
