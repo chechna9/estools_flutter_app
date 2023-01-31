@@ -33,6 +33,8 @@ class _TdlPageState extends State<TdlPage> {
       progress: 24,
     ),
   ];
+  late List<TaskModel> currentList;
+  String currentListIndex = 'Prog';
   void addTask(TaskModel e) {
     setState(() {
       inProgressTasks.add(e);
@@ -41,21 +43,21 @@ class _TdlPageState extends State<TdlPage> {
 
   void deleteTask(int index) {
     setState(() {
-      inProgressTasks.removeAt(index);
+      currentList.removeAt(index);
     });
   }
 
   void completeTask(int index) {
     setState(() {
-      completedTasks.add(inProgressTasks[index]);
-      inProgressTasks.removeAt(index);
+      completedTasks.add(currentList[index]);
+      currentList.removeAt(index);
     });
   }
 
   void archiveTask(int index) {
     setState(() {
-      archivedTasks.add(inProgressTasks[index]);
-      inProgressTasks.removeAt(index);
+      archivedTasks.add(currentList[index]);
+      currentList.removeAt(index);
     });
   }
 
@@ -74,6 +76,13 @@ class _TdlPageState extends State<TdlPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    currentList = inProgressTasks;
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -123,24 +132,40 @@ class _TdlPageState extends State<TdlPage> {
               children: [
                 FilterButton(
                   title: 'In progress',
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      currentListIndex = 'Prog';
+                      currentList = inProgressTasks;
+                    });
+                  },
+                  activated: currentListIndex == 'Prog',
                 ),
                 FilterButton(
                   title: 'Completed',
-                  onPressed: () {},
-                  activated: false,
+                  onPressed: () {
+                    setState(() {
+                      currentListIndex = 'Comp';
+                      currentList = completedTasks;
+                    });
+                  },
+                  activated: currentListIndex == 'Comp',
                 ),
                 FilterButton(
                   title: 'Archived',
-                  onPressed: () {},
-                  activated: false,
+                  onPressed: () {
+                    setState(() {
+                      currentListIndex = 'Arch';
+                      currentList = archivedTasks;
+                    });
+                  },
+                  activated: currentListIndex == 'Arch',
                 ),
               ],
             ),
             Flexible(
               child: ListView.builder(
-                itemCount: inProgressTasks.length,
-                itemBuilder: (context, index) => inProgressTasks
+                itemCount: currentList.length,
+                itemBuilder: (context, index) => currentList
                     .map(
                       (e) => TaskCard(
                         title: e.title,
