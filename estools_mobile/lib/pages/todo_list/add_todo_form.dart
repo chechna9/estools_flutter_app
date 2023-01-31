@@ -2,13 +2,15 @@ import 'package:estools_mobile/components/inputField.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:estools_mobile/models/configuration.dart';
 import 'package:estools_mobile/models/note_model.dart';
+import 'package:estools_mobile/models/task_model.dart';
 import 'package:estools_mobile/utils/colors.dart';
 import 'package:estools_mobile/utils/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddTodoForm extends StatefulWidget {
-  const AddTodoForm({super.key});
+  final Function addTask;
+  const AddTodoForm({super.key, required this.addTask});
 
   @override
   State<AddTodoForm> createState() => _AddTodoFormState();
@@ -21,6 +23,7 @@ class _AddTodoFormState extends State<AddTodoForm> {
   String? categVal;
   DateTime startTime = DateTime.now();
   DateTime? endTime;
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   void setEndTime(value) {
     setState(() {
       endTime = value;
@@ -41,28 +44,15 @@ class _AddTodoFormState extends State<AddTodoForm> {
         alignment: Alignment.center,
         padding: const EdgeInsets.all(20),
         child: Form(
+          key: formkey,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 // title
-                Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [myBoxShadow],
-                  ),
-                  child: TextFormField(
-                    controller: titleCntrl,
-                    decoration: InputDecoration(
-                      border: CustomBurders.myOutlinedBorder(
-                        color: myDark,
-                      ),
-                      focusedBorder:
-                          CustomBurders.myOutlinedBorder(color: myDark),
-                      fillColor: myGrey,
-                      filled: true,
-                      hintText: 'Title',
-                    ),
-                  ),
-                ),
+                CustomInputField(
+                    labelText: 'Title',
+                    validator: (e) => e!.isEmpty ? 'required field' : null,
+                    controller: titleCntrl),
                 const SizedBox(
                   height: 20,
                 ),
@@ -72,7 +62,7 @@ class _AddTodoFormState extends State<AddTodoForm> {
                   children: [
                     DropdownButton(
                       elevation: 12,
-                      hint: Text('Categorie'),
+                      hint: const Text('Categorie'),
                       icon: Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: myDark,
@@ -338,37 +328,32 @@ class _AddTodoFormState extends State<AddTodoForm> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          categVal = categVal ?? 'All';
-                          final String now =
-                              new DateTime.now().toString().split(' ')[0];
-                          final List<String> splitedNow = now.split('-');
-                          final String date =
-                              '${splitedNow[2]}/${splitedNow[1]}/${splitedNow[0]}';
-                          print('title ' + titleCntrl.text);
-                          print('body ' + descriptionCntrl.text);
-                          print('date ' + date);
-                          print('categ ' + categVal!);
-                          final Note newNote = Note(
-                            title: titleCntrl.text,
-                            description: descriptionCntrl.text,
-                            add_date: date,
-                            category: categVal!,
-                          );
+                          if (formkey.currentState!.validate()) {
+                            categVal = categVal ?? 'All';
 
-                          ConfigurationModel _config =
-                              Provider.of<ConfigurationModel>(context,
-                                  listen: false);
-                          _config.setNote(newNote);
+                            final TaskModel newTask = TaskModel(
+                              title: titleCntrl.text,
+                              startDate: startTime.toString().split(' ')[0],
+                              endDate: endTime.toString().split(' ')[0],
+                              progress: 0,
+                            );
+                            widget.addTask(newTask);
+                            Navigator.pop(context);
+                            // ConfigurationModel _config =
+                            //     Provider.of<ConfigurationModel>(context,
+                            //         listen: false);
+                            // _config.setNote(newNote);
 
-                          // try {
-                          //   ConfigurationModel _config =
-                          //       Provider.of<ConfigurationModel>(context,
-                          //           listen: false);
-                          //   _config.setNote(newNote);
-                          // } catch (e) {
-                          //   ScaffoldMessenger.of(context).showSnackBar(
-                          //       SnackBar(content: Text(e.toString())));
-                          // }
+                            // try {
+                            //   ConfigurationModel _config =
+                            //       Provider.of<ConfigurationModel>(context,
+                            //           listen: false);
+                            //   _config.setNote(newNote);
+                            // } catch (e) {
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //       SnackBar(content: Text(e.toString())));
+                            // }
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
