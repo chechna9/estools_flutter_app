@@ -1,8 +1,11 @@
 import 'package:estools_mobile/components/inputField.dart';
+import 'package:estools_mobile/service/auth.dart';
 import 'package:estools_mobile/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:estools_mobile/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:estools_mobile/models/index.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -21,8 +24,11 @@ class SignUp extends StatelessWidget {
               SvgPicture.asset(
                 EstlAssets.logoBlueRed,
               ),
-              Flexible(
-                  child: SingleChildScrollView(child: const RegisterForm())),
+              const Flexible(
+                child: SingleChildScrollView(
+                  child: RegisterForm(),
+                ),
+              ),
             ],
           ),
         ),
@@ -96,12 +102,38 @@ class RegisterForm extends StatelessWidget {
                 ),
               ),
               Row(
-                children: const [
+                children: [
                   Flexible(child: SIGoogle_Button()),
                   SizedBox(
                     width: 10,
                   ),
-                  Flexible(child: SignUp_Button()),
+                  Flexible(
+                    child: SignUp_Button(onPressed: () async {
+                      Navigator.of(context).pushReplacementNamed(loginRoute,
+                          arguments: {'email': emailCntrl.text});
+                      if (_formKey.currentState!.validate()) {
+                        late RequestSubmissionResponse response;
+
+                        response = await Auth.signup(
+                            emailCntrl.text,
+                            passwordCntrl.text,
+                            fnameCntrl.text,
+                            lnameCntrl.text,
+                            context);
+                        if (response.isValid) {
+                          Navigator.of(context).pushReplacementNamed(loginRoute,
+                              arguments: {'email': emailCntrl.text});
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(response.message),
+                              backgroundColor: myRed,
+                            ),
+                          );
+                        }
+                      }
+                    }),
+                  ),
                 ],
               ),
             ],
@@ -115,8 +147,10 @@ class RegisterForm extends StatelessWidget {
 class SignUp_Button extends StatelessWidget {
   const SignUp_Button({
     Key? key,
+    required this.onPressed,
   }) : super(key: key);
 
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -145,11 +179,7 @@ class SignUp_Button extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          Navigator.of(context).pushNamed(homeRoute);
-        }
-      },
+      onPressed: onPressed,
     );
   }
 }

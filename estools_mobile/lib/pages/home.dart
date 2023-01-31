@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.notesIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(notesRoute);
+                    Navigator.of(context).pushNamed(notesRoute);
                   },
                 ),
                 HomeItem(
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.todoListIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(todolistRoute);
+                    Navigator.of(context).pushNamed(todolistRoute);
                   },
                 ),
                 HomeItem(
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.timerIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(timerRoute);
+                    Navigator.of(context).pushNamed(timerRoute);
                   },
                 ),
                 HomeItem(
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.gallerieIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(gallerieRoute);
+                    Navigator.of(context).pushNamed(gallerieRoute);
                   },
                 ),
                 HomeItem(
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.agendaIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(agendaRoute);
+                    Navigator.of(context).pushNamed(agendaRoute);
                   },
                 ),
                 HomeItem(
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                   bgColor: Colors.white,
                   image: EstlAssets.cameraIm,
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(cameraRoute);
+                    Navigator.of(context).pushNamed(cameraRoute);
                   },
                 ),
               ],
